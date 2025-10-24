@@ -1,18 +1,18 @@
 // ===== СИСТЕМНЫЕ УТИЛИТЫ ОБЪЕКТА 3826 =====
 
 // Функция безопасного добавления сообщения с обработкой ошибок
-function safeAddMessage(text, sender = 'ОПЕРАТОР') {
+function safeAddMessage(text, sender = 'ОПЕРАТОР', files = []) {
     try {
-        if (!text || text.length === 0) {
-            throw new Error("ТЕКСТ СООБЩЕНИЯ НЕ МОЖЕТ БЫТЬ ПУСТЫМ");
+        if (!text && files.length === 0) {
+            throw new Error("СООБЩЕНИЕ НЕ МОЖЕТ БЫТЬ ПУСТЫМ");
         }
         
-        if (text.length > 256) {
+        if (text && text.length > 256) {
             throw new Error("ПРЕВЫШЕН ЛИМИТ ДЛИНЫ СООБЩЕНИЯ (256 СИМВОЛОВ)");
         }
         
-        addMessageToDOM(text, sender);
-        saveMessageToStorage(text, sender);
+        addMessageToDOM(text, sender, files);
+        saveMessageToStorage(text, sender, files);
         
     } catch (error) {
         console.error("СИСТЕМНАЯ ОШИБКА:", error.message);
@@ -21,12 +21,17 @@ function safeAddMessage(text, sender = 'ОПЕРАТОР') {
 }
 
 // Функция добавления сообщения в DOM
-function addMessageToDOM(text, sender) {
+function addMessageToDOM(text, sender, files = []) {
     const messageDiv = document.createElement('div');
     
     // Определяем приоритет сообщения
-    const isPriority = text.includes('СРОЧНО') || text.includes('ВАЖНО') || text.includes('ТРЕВОГА');
+    const isPriority = text && (text.includes('СРОЧНО') || text.includes('ВАЖНО') || text.includes('ТРЕВОГА'));
     messageDiv.className = isPriority ? 'message message-priority-high' : 'message';
+    
+    // Добавляем класс, если есть вложения
+    if (files && files.length > 0) {
+        messageDiv.classList.add('message-has-attachments');
+    }
     
     const now = new Date();
     const timeString = now.toLocaleTimeString('ru-RU', { 
@@ -46,11 +51,44 @@ function addMessageToDOM(text, sender) {
 
     const textElement = document.createElement('div');
     textElement.className = 'message-text';
-    textElement.textContent = text; // textContent сохраняет переносы
+    textElement.textContent = text || ''; // textContent сохраняет переносы
 
     messageDiv.appendChild(timeElement);
     messageDiv.appendChild(senderElement);
     messageDiv.appendChild(textElement);
+    
+    // Добавляем файлы, если они есть
+    if (files && files.length > 0) {
+        const filesElement = document.createElement('div');
+        filesElement.className = 'message-files';
+        
+        files.forEach(file => {
+            const fileElement = document.createElement('div');
+            fileElement.className = 'message-file';
+            
+            const fileIcon = document.createElement('span');
+            fileIcon.className = 'message-file-icon';
+            fileIcon.textContent = getFileIcon(getFileCategory(file.type));
+            
+            const fileLink = document.createElement('span');
+            fileLink.className = 'message-file-link';
+            fileLink.textContent = file.name;
+            fileLink.onclick = function() {
+                downloadFile(file);
+            };
+            
+            const fileSize = document.createElement('span');
+            fileSize.className = 'message-file-size';
+            fileSize.textContent = `(${formatFileSize(file.size)})`;
+            
+            fileElement.appendChild(fileIcon);
+            fileElement.appendChild(fileLink);
+            fileElement.appendChild(fileSize);
+            filesElement.appendChild(fileElement);
+        });
+        
+        messageDiv.appendChild(filesElement);
+    }
     
     // Анимация появления сообщения
     messageDiv.style.opacity = '0';
@@ -70,7 +108,7 @@ function addMessageToDOM(text, sender) {
 }
 
 // Функция для сохранения сообщений в системное хранилище
-function saveMessageToStorage(text, sender) {
+function saveMessageToStorage(text, sender, files = []) {
     const savedMessages = localStorage.getItem('chatMessages_3826');
     let messages = [];
     
@@ -78,11 +116,21 @@ function saveMessageToStorage(text, sender) {
         messages = JSON.parse(savedMessages);
     }
     
+    // Сохраняем информацию о файлах
+    const fileData = files.map(file => ({
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        data: null // Мы не сохраняем сами файлы в localStorage из-за ограничений размера
+    }));
+    
     messages.push({
         text: text,
         sender: sender,
         timestamp: new Date().toISOString(),
-        priority: text.includes('СРОЧНО') || text.includes('ВАЖНО')
+        priority: text && (text.includes('СРОЧНО') || text.includes('ВАЖНО')),
+        hasAttachments: files.length > 0,
+        attachments: fileData
     });
     
     // Ограничиваем историю 100 сообщениями
@@ -91,6 +139,51 @@ function saveMessageToStorage(text, sender) {
     }
     
     localStorage.setItem('chatMessages_3826', JSON.stringify(messages));
+}
+
+// Функция для скачивания файла
+function downloadFile(file) {
+    const url = URL.createObjectURL(file);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Вспомогательные функции для работы с файлами
+function getFileCategory(mimeType) {
+    if (mimeType.startsWith('image/')) return 'image';
+    if (mimeType.startsWith('audio/')) return 'audio';
+    if (mimeType.startsWith('video/')) return 'video';
+    if (mimeType.includes('pdf')) return 'document';
+    if (mimeType.includes('word') || mimeType.includes('document')) return 'document';
+    if (mimeType.includes('text')) return 'text';
+    return 'other';
+}
+
+function getFileIcon(category) {
+    const icons = {
+        image: '🖼',
+        audio: '🎵',
+        video: '🎬',
+        document: '📄',
+        text: '📝',
+        other: '📁'
+    };
+    return icons[category] || '📁';
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Б';
+    
+    const k = 1024;
+    const sizes = ['Б', 'КБ', 'МБ', 'ГБ'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
 // Функция для загрузки сообщений из системного хранилища
