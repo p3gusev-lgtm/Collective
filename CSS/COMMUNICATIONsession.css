@@ -1,0 +1,723 @@
+/* ===== БАЗОВЫЕ СТИЛИ И СБРОС ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-soviet-red: #8b0000;
+    --color-soviet-dark-red: #660000;
+    --color-soviet-light-red: #a52a2a;
+    --color-soviet-gray: #708090;
+    --color-soviet-dark-gray: #2f4f4f;
+    --color-soviet-light-gray: #d3d3d3;
+    --color-soviet-beige: #f5f5dc;
+    --color-soviet-dark-beige: #deb887;
+    --color-soviet-brown: #8b7355;
+    --color-soviet-dark-brown: #654321;
+    --color-soviet-cream: #fff8dc;
+    --color-soviet-gold: #daa520;
+    --color-bg-main: #f8f8f8;
+    --color-bg-panel: #f0f0f0;
+    --color-border: #c0c0c0;
+    --color-text: #2f2f2f;
+    --color-text-dim: #696969;
+}
+
+@font-face {
+    font-family: 'Soviet';
+    src: local('Courier New'), local('Consolas'), monospace;
+}
+
+body {
+    font-family: 'Soviet', monospace;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--color-soviet-light-gray) 0%, var(--color-bg-main) 100%);
+    color: var(--color-text);
+    display: grid;
+    grid-template-rows: 80px 1fr 60px; /* Фиксированные высоты для header и footer */
+    grid-template-columns: 280px 1fr;
+    grid-template-areas: 
+        "header header"
+        "sidebar main"
+        "footer footer";
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== ЭФФЕКТЫ СТАРОЙ БУМАГИ ===== */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 98%,
+        rgba(139, 0, 0, 0.05) 98%
+    );
+    background-size: 100% 20px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.6;
+}
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.02"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+    pointer-events: none;
+    z-index: 99;
+}
+
+/* ===== ШАПКА ===== */
+header {
+    grid-area: header;
+    background: linear-gradient(135deg, var(--color-soviet-dark-gray) 0%, var(--color-soviet-gray) 100%);
+    border-bottom: 3px solid var(--color-soviet-red);
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Фиксируем высоту header */
+    height: 80px; /* Явно задаем высоту */
+}
+
+.header-glitch {
+    position: relative;
+    display: inline-block;
+}
+
+.header-glitch h1 {
+    color: var(--color-soviet-cream);
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.glitch-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--color-soviet-red);
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.terminal-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.status-indicator {
+    color: var(--color-soviet-gold);
+    font-weight: bold;
+}
+
+.date-display {
+    color: var(--color-soviet-light-gray);
+    font-size: 0.8rem;
+}
+
+/* ===== БОКОВОЕ МЕНЮ ===== */
+aside {
+    grid-area: sidebar;
+    background: var(--color-soviet-beige);
+    border-right: 2px solid var(--color-soviet-brown);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: calc(100vh - 140px); /* Фиксируем высоту aside */
+    overflow-y: auto; /* Добавляем скролл если контент не помещается */
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-soviet-red);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.circuit-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-soviet-brown), transparent);
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu li {
+    margin: 6px 0;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    border-radius: 0 4px 4px 0;
+}
+
+.menu li:hover {
+    border-left-color: var(--color-soviet-red);
+    background: rgba(139, 0, 0, 0.05);
+}
+
+.menu a {
+    color: var(--color-soviet-dark-brown);
+    text-decoration: none;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+}
+
+.menu a:hover {
+    color: var(--color-soviet-red);
+    background: rgba(139, 0, 0, 0.08);
+}
+
+.menu-icon {
+    color: var(--color-soviet-dark-gray);
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.system-panel {
+    background: var(--color-soviet-cream);
+    border: 1px solid var(--color-soviet-dark-beige);
+    padding: 1rem;
+    margin-top: auto;
+    border-radius: 4px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.panel-header {
+    color: var(--color-soviet-red);
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    border-bottom: 1px solid var(--color-soviet-dark-beige);
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
+    color: var(--color-soviet-dark-brown);
+}
+
+.status-online {
+    color: var(--color-soviet-red);
+    font-weight: bold;
+}
+
+.status-secure {
+    color: var(--color-soviet-dark-gray);
+    font-weight: bold;
+}
+
+/* ===== ОСНОВНАЯ ОБЛАСТЬ ===== */
+main {
+    grid-area: main;
+    background: var(--color-bg-main);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-left: 1px solid var(--color-border);
+    height: calc(100vh - 140px); /* Фиксируем высоту main */
+    min-height: 0; /* Важно для правильной работы flex внутри */
+}
+
+.messages-header {
+    background: var(--color-soviet-beige);
+    border: 1px solid var(--color-soviet-brown);
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.channel-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.channel-name {
+    color: var(--color-soviet-red);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.message-counter {
+    color: var(--color-soviet-dark-gray);
+    font-size: 0.8rem;
+}
+
+.transmission-quality {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-soviet-dark-gray);
+}
+
+.quality-bar {
+    width: 100px;
+    height: 6px;
+    background: var(--color-soviet-light-gray);
+    border: 1px solid var(--color-soviet-gray);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.quality-level {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-soviet-red), var(--color-soviet-dark-red));
+    border-radius: 3px;
+}
+
+/* ===== КОНТЕЙНЕР СООБЩЕНИЙ ===== */
+.messages-container {
+    flex: 1; /* Занимает все доступное пространство в main */
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-soviet-brown);
+    background: var(--color-soviet-cream);
+    padding: 1rem;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+    min-height: 0; /* Важно для правильного скролла */
+}
+
+.messages-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+    background: var(--color-soviet-light-gray);
+    border-radius: 4px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background: var(--color-soviet-brown);
+    border-radius: 4px;
+}
+
+.system-message {
+    margin-bottom: 1rem;
+    padding: 10px;
+    background: rgba(139, 0, 0, 0.05);
+    border-left: 3px solid var(--color-soviet-gray);
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    border-left: 3px solid var(--color-soviet-dark-gray);
+    border-radius: 0 4px 4px 0;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.message-priority-high {
+    border-left-color: var(--color-soviet-red);
+    background: rgba(139, 0, 0, 0.08);
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: var(--color-soviet-gray);
+    margin-bottom: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.message-sender {
+    color: var(--color-soviet-dark-red);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.message-text {
+    color: var(--color-text);
+    line-height: 1.4;
+}
+
+.system-prefix {
+    color: var(--color-soviet-dark-gray);
+    font-weight: bold;
+}
+
+.message-text {
+    color: var(--color-text);
+    line-height: 1.4;
+    white-space: pre-wrap; /* Сохраняет переносы строк */
+    word-wrap: break-word;
+}
+
+.system-message .message-text {
+    white-space: pre-wrap; /* Для системных сообщений тоже */
+    word-wrap: break-word;
+}
+
+/* ===== ИНДИКАТОР СКРЫТЫХ СООБЩЕНИЙ ===== */
+.hidden-messages-indicator .system-message {
+    background: rgba(139, 0, 0, 0.1);
+    border-left: 3px solid var(--color-soviet-gold);
+    font-style: italic;
+}
+
+.hidden-messages-indicator .system-prefix {
+    color: var(--color-soviet-gold);
+}
+
+/* ===== ОГРАНИЧЕНИЕ ВЫСОТЫ КОНТЕЙНЕРА ===== */
+.messages-container {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* ===== ФОРМА ВВОДА ===== */
+.input-form {
+    background: var(--color-soviet-beige);
+    border: 1px solid var(--color-soviet-brown);
+    padding: 1rem;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Предотвращает сжатие формы */
+}
+
+.input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--color-soviet-dark-gray);
+}
+
+.transmission-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-soviet-red);
+    font-weight: bold;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-soviet-red);
+    border-radius: 50%;
+}
+
+.input-form textarea {
+    width: 100%;
+    height: 80px;
+    background: var(--color-soviet-cream);
+    border: 1px solid var(--color-soviet-dark-beige);
+    color: var(--color-text);
+    font-family: 'Soviet', monospace;
+    padding: 10px;
+    resize: vertical;
+    margin-bottom: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.input-form textarea:focus {
+    border-color: var(--color-soviet-red);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(139, 0, 0, 0.1);
+}
+
+.input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.char-counter {
+    color: var(--color-soviet-gray);
+    font-size: 0.8rem;
+}
+
+.input-form button {
+    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
+    color: var(--color-soviet-cream);
+    border: none;
+    padding: 8px 16px;
+    font-family: 'Soviet', monospace;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+}
+
+.input-form button:hover {
+    background: linear-gradient(135deg, var(--color-soviet-dark-red), var(--color-soviet-red));
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button-icon {
+    font-size: 0.9rem;
+}
+
+/* ===== СТИЛИ ДЛЯ ПРИКРЕПЛЕНИЯ ФАЙЛОВ ===== */
+.file-attachment-section {
+    background: var(--color-soviet-cream);
+    border: 1px solid var(--color-soviet-dark-beige);
+    border-radius: 3px;
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+    display: none;
+}
+
+.file-attachment-section.active {
+    display: block;
+}
+
+.attachment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--color-soviet-dark-gray);
+}
+
+.attach-file-btn {
+    background: linear-gradient(135deg, var(--color-soviet-gray), var(--color-soviet-dark-gray));
+    color: var(--color-soviet-cream);
+    border: none;
+    padding: 0.4rem 0.8rem;
+    font-family: 'Soviet', monospace;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.attach-file-btn:hover {
+    background: linear-gradient(135deg, var(--color-soviet-dark-gray), var(--color-soviet-gray));
+    transform: translateY(-1px);
+}
+
+.attached-files-list {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.attached-file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    margin-bottom: 0.3rem;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--color-soviet-light-gray);
+    border-radius: 2px;
+    font-size: 0.7rem;
+}
+
+.attached-file:last-child {
+    margin-bottom: 0;
+}
+
+.attached-file-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.attached-file-icon {
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.attached-file-name {
+    color: var(--color-soviet-dark-gray);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.attached-file-size {
+    color: var(--color-soviet-gray);
+    font-size: 0.6rem;
+    flex-shrink: 0;
+}
+
+.remove-attachment {
+    background: none;
+    border: none;
+    color: var(--color-soviet-red);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.2rem;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+}
+
+.remove-attachment:hover {
+    color: var(--color-soviet-dark-red);
+    transform: scale(1.1);
+}
+
+/* Стили для отображения файлов в сообщениях */
+.message-files {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--color-soviet-light-gray);
+}
+
+.message-file {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+    font-size: 0.8rem;
+}
+
+.message-file-icon {
+    font-size: 0.9rem;
+}
+
+.message-file-link {
+    color: var(--color-soviet-red);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.message-file-link:hover {
+    text-decoration: underline;
+}
+
+.message-file-size {
+    color: var(--color-soviet-gray);
+    font-size: 0.7rem;
+}
+
+/* Индикатор наличия вложений в сообщении */
+.message-has-attachments::after {
+    content: " 📎";
+    font-size: 0.8rem;
+}
+
+/* ===== ПОДВАЛ ===== */
+footer {
+    grid-area: footer;
+    background: linear-gradient(135deg, var(--color-soviet-dark-gray) 0%, var(--color-soviet-gray) 100%);
+    border-top: 3px solid var(--color-soviet-red);
+    padding: 1rem;
+    flex-shrink: 0; /* Фиксируем высоту footer */
+    height: 60px; /* Явно задаем высоту */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--color-soviet-light-gray);
+}
+
+.security-level {
+    color: var(--color-soviet-light-gray);
+}
+
+.level-maximum {
+    color: var(--color-soviet-gold);
+    font-weight: bold;
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "main"
+            "sidebar"
+            "footer";
+    }
+    
+    aside {
+        order: 3;
+        border-right: none;
+        border-top: 2px solid var(--color-soviet-brown);
+    }
+    
+    .messages-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    header, main, aside, footer {
+        padding: 0.8rem;
+    }
+    
+    .input-form textarea {
+        height: 60px;
+    }
+}

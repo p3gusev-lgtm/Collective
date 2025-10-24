@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Collective 3826</title>
+        <link rel="stylesheet" href="css/COMMUNICATIONsession.css">
+        <link rel="stylesheet" href="css/COMMUNICATIONlog.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="header-glitch">
+                <h1>
+                    ЖУРНАЛ СВЯЗИ - Collective 3826
+                </h1>
+
+                <div class="glitch-text">
+                    ЖУРНАЛ СВЯЗИ - Collective 3826
+                </div>
+            </div>
+
+            <div class="terminal-status">
+                <span class="status-indicator">
+                    ■ АРХИВ АКТИВЕН
+                </span>
+
+                <span class="date-display" id="currentDate">
+
+                </span>
+            </div>
+        </header>
+
+        <aside>
+            <nav class="menu">
+                <div class="menu-header">
+                    <div class="circuit-line">
+                        <!--  -->
+                    </div>
+
+                    <span>
+                        СИСТЕМНОЕ МЕНЮ
+                    </span>
+
+                    <div class="circuit-line">
+                        <!--  -->
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <a href="personal_business.html">
+                            <span class="menu-icon">
+                                ⟡
+                            </span>
+
+                            <!-- Личный кабинет -->
+                            ЛИЧНОЕ ДЕЛО
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a href="COMMUNICATIONlog.html">
+                            <span class="menu-icon">
+                                ⚡
+                            </span>
+
+                            <!-- Истории сообщений -->
+                            ЖУРНАЛ СВЯЗИ
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a href="COMMUNICATIONsession.html">
+                            <span class="menu-icon">
+                                ⚠
+                            </span>
+
+                            <!-- Месседжер -->
+                            СЕАНС СВЯЗИ
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a href="OBJECTdocumentation.html">
+                            <span class="menu-icon">
+                                📁
+                            </span>
+
+                            <!-- Фото, виде, аудио, загруженные пользователем -->
+                            ДОКУМЕНТАЦИЯ ОБЪЕКТА
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="system_utilities.html">
+                            <span class="menu-icon">
+                                🔧
+                            </span>
+
+                            СИСТЕМНЫЕ УТИЛИТЫ
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="system-panel">
+                <div class="panel-header">
+                    СТАТУС АРХИВА
+                </div>
+
+                <div class="status-item">
+                    <span>
+                        ДОСТУП:
+                    </span>
+                    
+                    <span class="status-online">
+                        ■ РАЗРЕШЕН
+                    </span>
+                </div>
+
+                <div class="status-item">
+                    <span>
+                        ЗАПИСЕЙ:
+                    </span>
+
+                    <span class="status-secure" id="archiveCount">
+                        0
+                    </span>
+                </div>
+
+                <div class="status-item">
+                    <span>
+                        ПЕРИОД:
+                    </span>
+
+                    <span class="status-secure" id="archivePeriod">
+                        -
+                    </span>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="messages-header">
+                <div class="channel-info">
+                    <span class="channel-name">
+                        АРХИВ СИСТЕМНЫХ СООБЩЕНИЙ
+                    </span>
+
+                    <span class="message-counter" id="totalMessagesCounter">
+                        ЗАГРУЗКА...
+                    </span>
+                </div>
+
+                <div class="transmission-quality">
+                    <div class="quality-bar">
+                        <div class="quality-level" style="width: 100%">
+
+                        </div>
+                    </div>
+
+                    <span>
+                        ПОЛНЫЙ ДОСТУП: 100%
+                    </span>
+                </div>
+            </div>
+    
+            <div class="archive-controls">
+                <div class="control-group">
+                    <button id="filterAll" class="filter-btn active">
+                        ВСЕ СООБЩЕНИЯ
+                    </button>
+
+                    <button id="filterOperator" class="filter-btn">
+                        ОПЕРАТОР
+                    </button>
+
+                    <button id="filterSystem" class="filter-btn">
+                        СИСТЕМА
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <button id="exportArchive" class="action-btn">
+                        ЭКСПОРТ АРХИВА
+                    </button>
+
+                    <button id="clearArchive" class="action-btn danger">
+                        ОЧИСТИТЬ АРХИВ
+                    </button>
+                </div>
+            </div>
+    
+            <div class="messages-container" id="archiveContainer">
+                <!-- Архивные сообщения будут загружены здесь -->
+            </div>
+    
+            <div class="archive-footer">
+                <div class="archive-info">
+                    <span id="displayedCount">
+                        0
+                    </span>
+                     из 
+                    <span id="totalCount">
+                        0
+                    </span> 
+                    сообщений показано
+                </div>
+
+                <div class="archive-nav">
+                    <button id="prevPage" class="nav-btn" disabled>
+                        ◀ НАЗАД
+                    </button>
+
+                    <span class="page-info">
+                        Страница 
+                        <span id="currentPage">
+                            1
+                        </span>
+                    </span>
+                    
+                    <button id="nextPage" class="nav-btn">
+                        ВПЕРЕД ▶
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>
+                    СЕКРЕТНЫЙ ОБЪЕКТ Collective 3826 ■ СИСТЕМА КОНТРОЛЯ И СВЯЗИ
+                </p>
+
+                <div class="security-level">
+                    УРОВЕНЬ СЕКРЕТНОСТИ:
+                    
+                    <span class="level-maximum">
+                        МАКСИМАЛЬНЫЙ
+                    </span>
+                </div>
+            </div>
+        </footer>
+
+        <footer>
+            <div class="footer-content">
+                <p>
+                    СЕКРЕТНЫЙ ОБЪЕКТ Collective 3826 ■ СИСТЕМА АРХИВАЦИИ
+                </p>
+
+                <div class="security-level">
+                    УРОВЕНЬ ДОСТУПА: 
+                    <span class="level-maximum">
+                        АРХИВНЫЙ
+                    </span>
+                </div>
+            </div>
+        </footer>
+    
+        <div class="scanlines"></div>
+        <div class="noise"></div>
+    
+        <script src="js/COMMUNICATIONlog.js"></script>
+    </body>
+</html>

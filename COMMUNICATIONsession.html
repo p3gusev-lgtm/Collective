@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Collective 3826</title>
+        <link rel="stylesheet" href="css/COMMUNICATIONsession.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="header-glitch">
+                <h1>
+                    СЕАНС СВЯЗИ - Collective 3826 
+                </h1>
+                
+                <div class="glitch-text">
+                    СЕАНС СВЯЗИ - Collective 3826
+                </div>
+            </div>
+
+            <div class="terminal-status">
+                <span class="status-indicator">
+                    ■ ПРИЁМО-ПЕРЕДАТЧИК АКТИВЕН
+                </span>
+
+                <span class="date-display" id="currentDate">
+                    <!--  -->
+                </span>
+            </div>
+        </header>
+
+        <aside>
+            <nav class="menu">
+                <div class="menu-header">
+                    <div class="circuit-line">
+                        <!--  -->
+                    </div>
+
+                    <span>
+                        СИСТЕМНОЕ МЕНЮ
+                    </span>
+
+                    <div class="circuit-line">
+                        <!--  -->
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <a href="personal_business.html">
+                            <span class="menu-icon">
+                                ⟡
+                            </span>
+
+                            <!-- Личный кабинет -->
+                            ЛИЧНОЕ ДЕЛО
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a href="COMMUNICATIONlog.html">
+                            <span class="menu-icon">
+                                ⚡
+                            </span>
+
+                            <!-- Истории сообщений -->
+                            ЖУРНАЛ СВЯЗИ
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a href="COMMUNICATIONsession.html">
+                            <span class="menu-icon">
+                                ⚠
+                            </span>
+
+                            <!-- Месседжер -->
+                            СЕАНС СВЯЗИ
+                        </a>
+                    </li>
+    
+                    <li>
+                        <a href="OBJECTdocumentation.html">
+                            <span class="menu-icon">
+                                📁
+                            </span>
+
+                            <!-- Фото, виде, аудио, загруженные пользователем -->
+                            ДОКУМЕНТАЦИЯ ОБЪЕКТА
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="system_utilities.html">
+                            <span class="menu-icon">
+                                🔧
+                            </span>
+
+                            СИСТЕМНЫЕ УТИЛИТЫ
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="system-panel">
+                <div class="panel-header">
+                    СИСТЕМНЫЙ СТАТУС
+                </div>
+
+                <div class="status-item">
+                    <span>
+                        СВЯЗЬ:
+                    </span>
+
+                    <span class="status-online">
+                        ■ ОНЛАЙН
+                    </span>
+                </div>
+
+                <div class="status-item">
+                    <span>
+                        БЕЗОПАСНОСТЬ:
+                    </span>
+
+                    <span class="status-secure">
+                        ■ СОВЕРШЕННАЯ
+                    </span>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="messages-header">
+                <div class="channel-info">
+                    <span class="channel-name">
+                        КАНАЛ СВЯЗИ: ОСНОВНОЙ
+                    </span>
+
+                    <span class="message-counter" id="messageCounter">
+                        СООБЩЕНИЙ: 0
+                    </span>
+                </div>
+
+                <div class="transmission-quality">
+                    <div class="quality-bar">
+                        <div class="quality-level" style="width: 85%">
+                            <!--  -->
+                        </div>
+                    </div>
+
+                    <span>
+                        КАЧЕСТВО СВЯЗИ: 85%
+                    </span>
+                </div>
+            </div>
+    
+            <div class="messages-container" id="messagesContainer">
+                <!-- Сообщения будут добавляться здесь -->
+                <!-- Определить роли на подобии 'ОПЕРАТОР', 'ДИСПЕТЧЕР', 'СИСТЕМНЫЙ ИНЖЕНЕР', 'ЛАБОРАНТ', 'ОХРАНА' -->
+                <!-- Добавить рандомную генерацию сообщений от администратора РАФИКА -->
+            </div>
+    
+            <form class="input-form" id="messageForm">
+                <div class="input-header">
+                    <span>
+                        ВВОД СООБЩЕНИЯ:
+                    </span>
+
+                    <div class="transmission-indicator">
+                        <span class="indicator-dot">
+
+                        </span>
+
+                        ГОТОВ К ПЕРЕДАЧЕ
+                    </div>
+                </div>
+
+                <textarea placeholder="ВВЕДИТЕ ТЕКСТ СООБЩЕНИЯ..." required maxlength="256"></textarea>
+
+                <div class="file-attachment-section" id="fileAttachmentSection">
+                    <div class="attachment-header">
+                        <span>
+                            ПРИКРЕПЛЕННЫЕ ФАЙЛЫ:
+                        </span>
+
+                        <button type="button" class="attach-file-btn" id="attachFileBtn">
+                            <span class="button-icon">
+                                📎
+                            </span>
+                            
+                            ПРИКРЕПИТЬ ФАЙЛ
+                        </button>
+                    </div>
+                    
+                    <input type="file" id="fileAttachment" multiple style="display: none;" 
+                           accept=".txt,.pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.wav,.mp4,.avi">
+                    
+                    <div class="attached-files-list" id="attachedFilesList">
+                        <!-- Прикрепленные файлы будут отображаться здесь -->
+                    </div>
+                </div>
+
+                <div class="input-footer">
+                    <div class="char-counter">
+                        <span id="charCount">
+                            0
+                        </span>
+                        
+                        /256
+                    </div>
+
+                    <button type="submit">
+                        <span class="button-icon">
+                            ▶
+                        </span>
+
+                        ПЕРЕДАТЬ
+                    </button>
+                </div>
+            </form>
+        </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>
+                СЕКРЕТНЫЙ ОБЪЕКТ Collective 3826 ■ СИСТЕМА КОНТРОЛЯ И СВЯЗИ
+            </p>
+
+            <div class="security-level">
+                УРОВЕНЬ СЕКРЕТНОСТИ:
+                
+                <span class="level-maximum">
+                    МАКСИМАЛЬНЫЙ
+                </span>
+            </div>
+        </div>
+    </footer>
+
+        <script src="js/COMMUNICATIONsession.js"></script>
+        <script src="js/COMMUNICATIONsessionUTILS.js"></script>
+    </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collective 3826</title>
+    <link rel="stylesheet" href="css/COMMUNICATIONsession.css">
+    <link rel="stylesheet" href="css/OBJECTdocumentation.css">
+</head>
+
+<body>
+    <div class="scanlines">
+
+    </div>
+
+    <div class="noise">
+
+    </div>
+
+    <header>
+        <div class="header-glitch">
+            <h1>
+                ДОКУМЕНТАЦИЯ ОБЪЕКТА - Collective 3826
+            </h1>
+
+            <div class="glitch-text">
+                ДОКУМЕНТАЦИЯ ОБЪЕКТА - Collective 3826
+            </div>
+        </div>
+
+        <div class="terminal-status">
+            <span class="status-indicator">
+                ■ ЗАПРОС АКТИВЕН
+            </span>
+
+            <span class="date-display" id="currentDate">
+
+            </span>
+        </div>
+    </header>
+
+    <aside>
+        <nav class="menu">
+            <div class="menu-header">
+                <div class="circuit-line">
+                    <!--  -->
+                </div>
+
+                <span>
+                    СИСТЕМНОЕ МЕНЮ
+                </span>
+
+                <div class="circuit-line">
+                    <!--  -->
+                </div>
+            </div>
+            <ul>
+                <li>
+                    <a href="personal_business.html">
+                        <span class="menu-icon">
+                            ⟡
+                        </span>
+
+                        <!-- Личный кабинет -->
+                        ЛИЧНОЕ ДЕЛО
+                    </a>
+                </li>
+
+                <li>
+                    <a href="COMMUNICATIONlog.html">
+                        <span class="menu-icon">
+                            ⚡
+                        </span>
+
+                        <!-- Истории сообщений -->
+                        ЖУРНАЛ СВЯЗИ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="COMMUNICATIONsession.html">
+                        <span class="menu-icon">
+                            ⚠
+                        </span>
+
+                        <!-- Месседжер -->
+                        СЕАНС СВЯЗИ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="OBJECTdocumentation.html">
+                        <span class="menu-icon">
+                            📁
+                        </span>
+
+                        <!-- Фото, виде, аудио, загруженные пользователем -->
+                        ДОКУМЕНТАЦИЯ ОБЪЕКТА
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="system_utilities.html">
+                        <span class="menu-icon">
+                            🔧
+                        </span>
+
+                        СИСТЕМНЫЕ УТИЛИТЫ
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="system-panel">
+            <div class="panel-header">
+                СИСТЕМНЫЙ СТАТУС
+            </div>
+
+            <div class="status-item">
+                <span>
+                    СВЯЗЬ:
+                </span>
+
+                <span class="status-online">
+                    ■ ОНЛАЙН
+                </span>
+            </div>
+
+            <div class="status-item">
+                <span>
+                    БЕЗОПАСНОСТЬ:
+                </span>
+
+                <span class="status-secure">
+                    ■ СОВЕРШЕННАЯ
+                </span>
+            </div>
+
+            <div class="status-item">
+                <span>
+                    АРХИВ:
+                </span>
+
+                <span class="status-online" id="archiveStats">
+                    ■ ЗАПОЛНЕН
+                </span>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <div class="archive-header">
+            <div class="archive-info">
+                <span class="archive-title">
+                    ДОКУМЕНТАЦИЯ ОБЪЕКТА
+                </span>
+
+                <span class="file-counter" id="fileCounter">
+                    ФАЙЛОВ: 0
+                </span>
+            </div>
+
+            <div class="storage-status">
+                <div class="storage-bar">
+                    <div class="storage-level" id="storageLevel" style="width: 0%">
+
+                    </div>
+                </div>
+
+                <span id="storageText">
+                    ИСПОЛЬЗОВАНО: 0 БАЙТ
+                </span>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-header">
+                <span>
+                    ЗАГРУЗКА НОВЫХ ОБЪЕКТОВ
+                </span>
+
+                <div class="security-warning">
+                    <span class="warning-icon">
+                        ⚠
+                    </span>
+
+                    МАКС. РАЗМЕР: 10 МБ НА ФАЙЛ
+                </div>
+            </div>
+
+            <form class="upload-form" id="uploadForm">
+                <div class="file-input-container">
+                    <input type="file" id="fileInput" multiple accept=".txt,.pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.wav,.mp4,.avi">
+                    <label for="fileInput" class="file-input-label">
+                        <span class="upload-icon">
+                            📤
+                        </span>
+
+                        ВЫБРАТЬ ФАЙЛЫ
+                    </label>
+                </div>
+
+                <div class="selected-files" id="selectedFiles">
+                    <!-- Выбранные файлы будут отображаться здесь -->
+                </div>
+
+                <button type="submit" class="upload-button">
+                    <span class="button-icon">
+                        ⏫
+                    </span>
+
+                    ЗАГРУЗИТЬ В АРХИВ
+                </button>
+            </form>
+        </div>
+
+        <div class="files-container" id="filesContainer">
+            <!-- Файлы будут отображаться здесь -->
+            <div class="no-files" id="noFilesMessage">
+                <div class="no-files-icon">
+                    📁
+                </div>
+
+                <div class="no-files-text">
+                    АРХИВ ПУСТ
+                </div>
+
+                <div class="no-files-subtext">
+                    Загрузите первые протоколы для начала работы
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>
+                ДОКУМЕНТАЦИЯ ОБЪЕКТА Collective 3826 ■ СИСТЕМА КОНТРОЛЯ И СВЯЗИ
+            </p>
+
+            <div class="security-level">
+                УРОВЕНЬ СЕКРЕТНОСТИ:
+                <span class="level-maximum">
+                    МАКСИМАЛЬНЫЙ
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/OBJECTdocumentation.js"></script>
+</body>
+</html>
