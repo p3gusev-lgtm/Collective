@@ -643,6 +643,177 @@ main {
     font-size: 0.7rem;
 }
 
+/* ===== СТИЛИ ДЛЯ МОДАЛЬНОГО ОКНА ===== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    background: var(--color-soviet-beige);
+    border: 2px solid var(--color-soviet-brown);
+    border-radius: 4px;
+    margin: 5% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 700px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--color-soviet-dark-gray), var(--color-soviet-gray));
+    color: var(--color-soviet-cream);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-soviet-red);
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--color-soviet-cream);
+}
+
+.close-modal {
+    color: var(--color-soviet-cream);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--color-soviet-red);
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 1rem;
+    flex: 1;
+    overflow-y: auto;
+    background: var(--color-soviet-cream);
+}
+
+.modal-files-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.8rem;
+    padding: 0.5rem;
+}
+
+.modal-file-item {
+    background: var(--color-soviet-beige);
+    border: 1px solid var(--color-soviet-dark-beige);
+    border-radius: 3px;
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.modal-file-item:hover {
+    border-color: var(--color-soviet-red);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-file-item.selected {
+    border-color: var(--color-soviet-red);
+    background: rgba(139, 0, 0, 0.05);
+}
+
+.modal-file-checkbox {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-soviet-red);
+}
+
+.modal-file-icon {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.modal-file-name {
+    font-size: 0.8rem;
+    color: var(--color-soviet-dark-gray);
+    word-break: break-word;
+    margin-bottom: 0.3rem;
+}
+
+.modal-file-size {
+    font-size: 0.7rem;
+    color: var(--color-soviet-gray);
+}
+
+.modal-file-type {
+    font-size: 0.7rem;
+    color: var(--color-soviet-red);
+    text-transform: uppercase;
+}
+
+.modal-footer {
+    padding: 1rem;
+    background: var(--color-soviet-cream);
+    border-top: 1px solid var(--color-soviet-dark-beige);
+    text-align: right;
+}
+
+.modal-confirm-btn {
+    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
+    color: var(--color-soviet-cream);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-family: 'Soviet', monospace;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.modal-confirm-btn:hover {
+    background: linear-gradient(135deg, var(--color-soviet-dark-red), var(--color-soviet-red));
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.no-files-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-soviet-gray);
+    font-style: italic;
+}
+
+/* Адаптивность для модального окна */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .modal-files-container {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Индикатор наличия вложений в сообщении */
 .message-has-attachments::after {
     content: " 📎";

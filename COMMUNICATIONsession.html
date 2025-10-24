@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Реализовать голосовой чат -->
 
 <html lang="ru">
     <head>
@@ -48,7 +49,7 @@
                 </div>
                 <ul>
                     <li>
-                        <a href="personal_business.html">
+                        <a href="PERSONALbusiness.html">
                             <span class="menu-icon">
                                 ⟡
                             </span>
@@ -183,21 +184,45 @@
                         <span>
                             ПРИКРЕПЛЕННЫЕ ФАЙЛЫ:
                         </span>
-
+                        
                         <button type="button" class="attach-file-btn" id="attachFileBtn">
                             <span class="button-icon">
                                 📎
                             </span>
-                            
-                            ПРИКРЕПИТЬ ФАЙЛ
+
+                            ВЫБРАТЬ ИЗ АРХИВА
                         </button>
                     </div>
                     
-                    <input type="file" id="fileAttachment" multiple style="display: none;" 
-                           accept=".txt,.pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.wav,.mp4,.avi">
-                    
                     <div class="attached-files-list" id="attachedFilesList">
                         <!-- Прикрепленные файлы будут отображаться здесь -->
+                    </div>
+                </div>
+                
+                <!-- Модальное окно выбора файлов из архива -->
+                <div id="archiveModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="modal-title">
+                                ВЫБОР ФАЙЛОВ ИЗ АРХИВА ОБЪЕКТА
+                            </span>
+
+                            <span class="close-modal" id="closeModal">
+                                &times;
+                            </span>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="modal-files-container" id="modalFilesContainer">
+                                <!-- Файлы из архива будут загружаться здесь -->
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" id="confirmSelection" class="modal-confirm-btn">
+                                ПРИКРЕПИТЬ ВЫБРАННЫЕ
+                            </button>
+                        </div>
                     </div>
                 </div>
 

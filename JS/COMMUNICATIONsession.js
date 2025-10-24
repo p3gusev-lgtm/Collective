@@ -7,14 +7,18 @@ let charCounter;
 let messageCounter;
 let fileAttachmentSection;
 let attachFileBtn;
-let fileAttachmentInput;
 let attachedFilesList;
+
+// Элементы модального окна
+let archiveModal;
+let modalFilesContainer;
+let closeModal;
+let confirmSelection;
 
 // Массив для хранения прикрепленных файлов
 let attachedFiles = [];
-
-// Флаг для отслеживания активности секции файлов
-let isFileSectionActive = false;
+// Массив для хранения выбранных файлов в модальном окне
+let selectedArchiveFiles = [];
 
 // Инициализация системы
 function init() {
@@ -25,14 +29,22 @@ function init() {
     messageCounter = document.getElementById('messageCounter');
     fileAttachmentSection = document.getElementById('fileAttachmentSection');
     attachFileBtn = document.getElementById('attachFileBtn');
-    fileAttachmentInput = document.getElementById('fileAttachment');
     attachedFilesList = document.getElementById('attachedFilesList');
+    
+    // Элементы модального окна
+    archiveModal = document.getElementById('archiveModal');
+    modalFilesContainer = document.getElementById('modalFilesContainer');
+    closeModal = document.getElementById('closeModal');
+    confirmSelection = document.getElementById('confirmSelection');
     
     // Инициализация системных компонентов
     initSystem();
     loadMessagesFromStorage();
     setupEventListeners();
     scrollToBottom();
+    
+    // Показываем секцию прикрепления файлов постоянно
+    fileAttachmentSection.style.display = 'block';
 }
 
 // Инициализация системных функций
@@ -41,7 +53,7 @@ function initSystem() {
     updateMessageCounter();
     
     // Запуск системных анимаций
-    setInterval(updateSystemDate, 60000); // Обновлять время каждую минуту
+    setInterval(updateSystemDate, 60000);
 }
 
 // Обновление системной даты и времени
@@ -81,89 +93,140 @@ function setupEventListeners() {
             clearAttachedFiles();
             scrollToBottom();
             updateMessageCounter();
-            
-            // ЗАКОММЕНТИРОВАТЬ системный ответ
-            // setTimeout(generateSystemResponse, 2000);
         }
     });
     
     // Обработка клавиш в текстовом поле
     textarea.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' && e.ctrlKey) {
-            // Ctrl+Enter - отправка сообщения
             e.preventDefault();
             messageForm.dispatchEvent(new Event('submit'));
         }
-        // Enter без Ctrl - обычный перенос строки
     });
     
     // Счетчик символов
     textarea.addEventListener('input', updateCharCounter);
     
     // Обработчики для прикрепления файлов
-    attachFileBtn.addEventListener('click', function() {
-        fileAttachmentInput.click();
-    });
+    attachFileBtn.addEventListener('click', openArchiveModal);
     
-    fileAttachmentInput.addEventListener('change', handleFileAttachment);
+    // Обработчики модального окна
+    closeModal.addEventListener('click', closeArchiveModal);
+    confirmSelection.addEventListener('click', confirmFileSelection);
     
-    // Показать секцию прикрепления файлов при фокусе на textarea
-    textarea.addEventListener('focus', function() {
-        showFileAttachmentSection();
-    });
-    
-    // Обработчик для закрытия секции файлов при клике вне ее
-    document.addEventListener('click', function(e) {
-        if (!fileAttachmentSection.contains(e.target) && 
-            e.target !== textarea && 
-            !textarea.contains(e.target)) {
-            hideFileAttachmentSection();
+    // Закрытие модального окна при клике вне его
+    archiveModal.addEventListener('click', function(e) {
+        if (e.target === archiveModal) {
+            closeArchiveModal();
         }
     });
+}
+
+// Открытие модального окна с архивом файлов
+function openArchiveModal() {
+    loadArchiveFiles();
+    archiveModal.style.display = 'block';
+}
+
+// Закрытие модального окна
+function closeArchiveModal() {
+    archiveModal.style.display = 'none';
+    selectedArchiveFiles = [];
+}
+
+// Загрузка файлов из архива в модальное окно
+function loadArchiveFiles() {
+    const archivedFiles = getArchivedFiles();
+    modalFilesContainer.innerHTML = '';
     
-    // Предотвращаем закрытие секции при клике внутри нее
-    fileAttachmentSection.addEventListener('click', function(e) {
-        e.stopPropagation();
+    if (archivedFiles.length === 0) {
+        modalFilesContainer.innerHTML = `
+            <div class="no-files-message">
+                АРХИВ ПУСТ. ЗАГРУЗИТЕ ФАЙЛЫ В РАЗДЕЛЕ "ДОКУМЕНТАЦИЯ ОБЪЕКТА"
+            </div>
+        `;
+        return;
+    }
+    
+    archivedFiles.forEach(file => {
+        const fileElement = document.createElement('div');
+        fileElement.className = 'modal-file-item';
+        fileElement.innerHTML = `
+            <input type="checkbox" class="modal-file-checkbox" data-file-id="${file.id}">
+            <span class="modal-file-icon">${getFileIcon(file.category)}</span>
+            <div class="modal-file-name">${file.name}</div>
+            <div class="modal-file-type">${getFileTypeText(file.category)}</div>
+            <div class="modal-file-size">${formatFileSize(file.size)}</div>
+        `;
+        
+        // Обработчик выбора файла
+        fileElement.addEventListener('click', function(e) {
+            if (e.target.type !== 'checkbox') {
+                const checkbox = this.querySelector('.modal-file-checkbox');
+                checkbox.checked = !checkbox.checked;
+            }
+            
+            const checkbox = this.querySelector('.modal-file-checkbox');
+            if (checkbox.checked) {
+                this.classList.add('selected');
+            } else {
+                this.classList.remove('selected');
+            }
+        });
+        
+        modalFilesContainer.appendChild(fileElement);
     });
 }
 
-// Показать секцию прикрепления файлов
-function showFileAttachmentSection() {
-    fileAttachmentSection.classList.add('active');
-    isFileSectionActive = true;
-}
-
-// Скрыть секцию прикрепления файлов (только если нет прикрепленных файлов)
-function hideFileAttachmentSection() {
-    if (attachedFiles.length === 0) {
-        fileAttachmentSection.classList.remove('active');
-        isFileSectionActive = false;
+// Получение файлов из архива
+function getArchivedFiles() {
+    try {
+        const storedFiles = localStorage.getItem('protocols_3826');
+        return storedFiles ? JSON.parse(storedFiles) : [];
+    } catch (error) {
+        console.error('Ошибка загрузки файлов из архива:', error);
+        return [];
     }
 }
 
-// Обработка прикрепления файлов
-function handleFileAttachment(event) {
-    const files = Array.from(event.target.files);
+// Подтверждение выбора файлов из архива
+function confirmFileSelection() {
+    const selectedCheckboxes = modalFilesContainer.querySelectorAll('.modal-file-checkbox:checked');
+    const archivedFiles = getArchivedFiles();
     
-    files.forEach(file => {
-        // Проверяем размер файла (максимум 5 МБ)
-        if (file.size > 5 * 1024 * 1024) {
-            showSystemAlert(`ФАЙЛ "${file.name}" ПРЕВЫШАЕТ ЛИМИТ 5 МБ`, 'error');
-            return;
+    selectedCheckboxes.forEach(checkbox => {
+        const fileId = checkbox.getAttribute('data-file-id');
+        const fileData = archivedFiles.find(file => file.id === fileId);
+        
+        if (fileData && !attachedFiles.find(f => f.id === fileId)) {
+            // Создаем File-like объект из данных архива
+            const file = dataURLtoFile(fileData.data, fileData.name, fileData.type);
+            file.id = fileData.id; // Сохраняем ID для отслеживания
+            file.category = fileData.category;
+            
+            attachedFiles.push(file);
+            addFileToAttachmentList(file);
         }
-        
-        // Добавляем файл в массив
-        attachedFiles.push(file);
-        
-        // Добавляем файл в список отображения
-        addFileToAttachmentList(file);
     });
     
-    // Сбрасываем input
-    event.target.value = '';
+    closeArchiveModal();
+    showSystemAlert(`ДОБАВЛЕНО ФАЙЛОВ: ${selectedCheckboxes.length}`, 'success');
+}
+
+// Преобразование Data URL в File объект
+function dataURLtoFile(dataurl, filename, mimeType) {
+    const arr = dataurl.split(',');
+    const mime = mimeType || arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
     
-    // Показываем секцию прикрепления файлов
-    showFileAttachmentSection();
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    
+    const file = new File([u8arr], filename, { type: mime });
+    return file;
 }
 
 // Добавление файла в список прикрепленных
@@ -179,35 +242,29 @@ function addFileToAttachmentList(file) {
             <span class="attached-file-name">${file.name}</span>
             <span class="attached-file-size">${formatFileSize(file.size)}</span>
         </div>
-        <button type="button" class="remove-attachment" data-filename="${file.name}">×</button>
+        <button type="button" class="remove-attachment" data-fileid="${file.id}">×</button>
     `;
     
     attachedFilesList.appendChild(fileElement);
     
     // Обработчик удаления файла
     fileElement.querySelector('.remove-attachment').addEventListener('click', function(e) {
-        e.stopPropagation(); // Предотвращаем всплытие
-        const fileName = this.getAttribute('data-filename');
-        removeAttachedFile(fileName);
+        e.stopPropagation();
+        const fileId = this.getAttribute('data-fileid');
+        removeAttachedFile(fileId);
         fileElement.remove();
     });
 }
 
 // Удаление прикрепленного файла
-function removeAttachedFile(fileName) {
-    attachedFiles = attachedFiles.filter(file => file.name !== fileName);
-    
-    // Скрываем секцию, если файлов нет
-    if (attachedFiles.length === 0) {
-        hideFileAttachmentSection();
-    }
+function removeAttachedFile(fileId) {
+    attachedFiles = attachedFiles.filter(file => file.id !== fileId);
 }
 
 // Очистка прикрепленных файлов
 function clearAttachedFiles() {
     attachedFiles = [];
     attachedFilesList.innerHTML = '';
-    hideFileAttachmentSection();
 }
 
 // Обновление счетчика символов
@@ -215,7 +272,6 @@ function updateCharCounter() {
     const count = textarea.value.length;
     charCounter.textContent = count;
     
-    // Изменение цвета при приближении к лимиту
     if (count > 200) {
         charCounter.style.color = 'var(--color-red)';
     } else if (count > 150) {
@@ -223,40 +279,6 @@ function updateCharCounter() {
     } else {
         charCounter.style.color = 'var(--color-text-dim)';
     }
-}
-
-// Генерация системного ответа
-function generateSystemResponse() {
-    const responses = [
-        "СООБЩЕНИЕ ПРИНЯТО. ОЖИДАЙТЕ ОБРАБОТКИ.",
-        "ИНФОРМАЦИЯ ЗАФИКСИРОВАНА В СИСТЕМНОМ ЖУРНАЛЕ.",
-        "ПЕРЕДАЧА ПОДТВЕРЖДЕНА. КАНАЛ СВЯЗИ СТАБИЛЕН.",
-        "СООБЩЕНИЕ ПРОЧИТАНО СИСТЕМОЙ КОНТРОЛЯ.",
-        "ДАННЫЕ ПЕРЕДАВАТЬ С СОБЛЮДЕНИЕМ РЕЖИМА СЕКРЕТНОСТИ."
-    ];
-    
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    
-    const systemDiv = document.createElement('div');
-    systemDiv.className = 'system-message';
-    
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('ru-RU', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-        second: '2-digit'
-    });
-    
-    systemDiv.innerHTML = `
-        <div class="message-time">[${timeString}]</div>
-        <div class="message-text">
-            <span class="system-prefix">СИСТЕМА:</span> ${randomResponse}
-        </div>
-    `;
-    
-    messagesContainer.appendChild(systemDiv);
-    scrollToBottom();
-    updateMessageCounter();
 }
 
 // Функция добавления сообщения
@@ -290,6 +312,18 @@ function getFileIcon(category) {
         other: '📁'
     };
     return icons[category] || '📁';
+}
+
+function getFileTypeText(category) {
+    const types = {
+        image: 'ИЗОБРАЖЕНИЕ',
+        audio: 'АУДИО',
+        video: 'ВИДЕО',
+        document: 'ДОКУМЕНТ',
+        text: 'ТЕКСТ',
+        other: 'ФАЙЛ'
+    };
+    return types[category] || 'ФАЙЛ';
 }
 
 function formatFileSize(bytes) {

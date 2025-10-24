@@ -1,0 +1,481 @@
+/* ===== СТИЛИ СТРАНИЦЫ ЛИЧНОГО ДЕЛА ===== */
+
+.personal-file-header {
+    background: var(--color-soviet-beige);
+    border: 1px solid var(--color-soviet-brown);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.personal-file-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-soviet-red), var(--color-soviet-dark-red));
+}
+
+.file-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.main-title {
+    color: var(--color-soviet-red);
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    color: var(--color-soviet-dark-gray);
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.clearance-level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.clearance-badge {
+    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
+    color: var(--color-soviet-cream);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.clearance-text {
+    font-size: 0.7rem;
+}
+
+.clearance-type {
+    font-size: 1rem;
+}
+
+.clearance-info {
+    color: var(--color-soviet-dark-gray);
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+.personal-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.info-column,
+.stats-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ===== КАРТОЧКИ ИНФОРМАЦИИ ===== */
+.info-card {
+    background: var(--color-soviet-cream);
+    border: 1px solid var(--color-soviet-brown);
+    border-radius: 4px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-soviet-dark-gray);
+    border-radius: 4px 0 0 4px;
+}
+
+.personal-info::before {
+    background: var(--color-soviet-red);
+}
+
+.system-info::before {
+    background: var(--color-soviet-dark-gray);
+}
+
+.stats-card::before {
+    background: var(--color-soviet-gold);
+}
+
+.actions-card::before {
+    background: var(--color-soviet-gray);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-soviet-dark-beige);
+}
+
+.card-title {
+    color: var(--color-soviet-dark-gray);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.card-icon {
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+/* ===== СЕТКИ ИНФОРМАЦИИ ===== */
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--color-soviet-light-gray);
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: var(--color-soviet-dark-gray);
+    font-size: 0.8rem;
+    font-weight: bold;
+    flex: 1;
+}
+
+.info-value {
+    color: var(--color-text);
+    font-size: 0.9rem;
+    flex: 1;
+    text-align: right;
+    font-family: 'Courier New', monospace;
+}
+
+.status-active {
+    color: var(--color-soviet-red);
+    font-weight: bold;
+}
+
+/* ===== СТАТИСТИКА ===== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    background: var(--color-soviet-beige);
+    border: 1px solid var(--color-soviet-dark-beige);
+    border-radius: 3px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    color: var(--color-soviet-dark-gray);
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.stat-value {
+    display: block;
+    color: var(--color-soviet-red);
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+/* ===== ГРАФИК АКТИВНОСТИ ===== */
+.activity-chart {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-soviet-dark-beige);
+}
+
+.chart-header {
+    color: var(--color-soviet-dark-gray);
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    text-align: center;
+}
+
+.chart-bars {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 80px;
+    gap: 0.3rem;
+}
+
+.chart-bar {
+    flex: 1;
+    background: linear-gradient(to top, var(--color-soviet-red), var(--color-soviet-dark-red));
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    min-width: 20px;
+    transition: all 0.3s ease;
+}
+
+.chart-bar:hover {
+    opacity: 0.8;
+    transform: scaleY(1.05);
+}
+
+.chart-label {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    color: var(--color-soviet-gray);
+    white-space: nowrap;
+}
+
+/* ===== КНОПКИ ДЕЙСТВИЙ ===== */
+.actions-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+}
+
+.action-btn {
+    background: linear-gradient(135deg, var(--color-soviet-gray), var(--color-soviet-dark-gray));
+    color: var(--color-soviet-cream);
+    border: 1px solid var(--color-soviet-dark-gray);
+    padding: 0.8rem 1rem;
+    font-family: 'Soviet', monospace;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, var(--color-soviet-dark-gray), var(--color-soviet-gray));
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn.warning {
+    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
+    border-color: var(--color-soviet-dark-red);
+}
+
+.action-btn.warning:hover {
+    background: linear-gradient(135deg, var(--color-soviet-dark-red), var(--color-soviet-red));
+}
+
+.btn-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО СМЕНЫ ПАРОЛЯ ===== */
+.password-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    color: var(--color-soviet-dark-gray);
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.form-group input {
+    background: var(--color-soviet-cream);
+    border: 1px solid var(--color-soviet-dark-beige);
+    border-radius: 3px;
+    padding: 0.6rem;
+    font-family: 'Soviet', monospace;
+    color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--color-soviet-red);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
+}
+
+.password-strength {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    background: var(--color-soviet-beige);
+    border-radius: 3px;
+    text-align: center;
+}
+
+.strength-bar {
+    height: 4px;
+    background: var(--color-soviet-light-gray);
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+}
+
+.strength-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--color-soviet-red);
+    transition: width 0.3s ease;
+}
+
+.strength-text {
+    color: var(--color-soviet-gray);
+    font-size: 0.7rem;
+}
+
+.modal-cancel-btn {
+    background: var(--color-soviet-gray);
+    color: var(--color-soviet-cream);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-family: 'Soviet', monospace;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-right: 0.5rem;
+}
+
+.modal-cancel-btn:hover {
+    background: var(--color-soviet-dark-gray);
+}
+
+/* Добавьте в конец файла */
+.strength-bar {
+    height: 4px;
+    background: var(--color-soviet-light-gray);
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.strength-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--strength-width, 0%);
+    background: var(--strength-color, var(--color-soviet-red));
+    transition: all 0.3s ease;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 1024px) {
+    .personal-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .personal-file-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+    
+    .info-value {
+        text-align: left;
+    }
+    
+    .chart-bars {
+        flex-wrap: wrap;
+        height: auto;
+    }
+    
+    .chart-bar {
+        flex: 0 0 calc(25% - 0.3rem);
+        height: 40px;
+    }
+    
+    .chart-label {
+        position: static;
+        transform: none;
+        text-align: center;
+        margin-top: 0.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .personal-file-header,
+    .info-card {
+        padding: 1rem;
+    }
+    
+    .main-title {
+        font-size: 1.1rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-btn {
+        font-size: 0.7rem;
+        padding: 0.6rem 0.8rem;
+    }
+}
