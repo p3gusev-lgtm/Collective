@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collective 3826 - Система доступа</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="radiation-symbol">☢</div>
+
+    <div class="login-container">
+        <!-- Заголовок системы -->
+        <div class="system-header">
+            <div class="header-glitch">
+                <h1>
+                    Collective 3826
+                </h1>
+
+                <div class="glitch-text">
+                    Collective 3826
+                </div>
+            </div>
+            
+            <div class="system-status">
+                <span class="status-indicator">
+                    ■ СИСТЕМА ДОСТУПА АКТИВНА
+                </span>
+
+                <span class="date-display" id="currentDate">
+                    
+                </span>
+            </div>
+        </div>
+
+        <!-- Основной контейнер форм -->
+        <div class="access-forms">
+            <!-- Форма входа -->
+            <div class="form-container active" id="loginFormContainer">
+                <div class="form-header">
+                    <span class="form-title">АУТЕНТИФИКАЦИЯ ОПЕРАТОРА</span>
+                    <span class="form-icon">🔐</span>
+                </div>
+
+                <form class="access-form" id="loginForm">
+                    <div class="input-group">
+                        <label for="loginIdentifier">ИДЕНТИФИКАТОР:</label>
+                        <input type="text" id="loginIdentifier" required 
+                               placeholder="OP-3826-XXX" 
+                               pattern="OP-3826-[0-9]{3}">
+                        <div class="input-hint">ФОРМАТ: OP-3826-XXX</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="loginPassword">КОД ДОСТУПА:</label>
+                        <input type="password" id="loginPassword" required 
+                               minlength="6"
+                               placeholder="●●●●●●●●">
+                        <div class="password-toggle" id="loginPasswordToggle">👁</div>
+                    </div>
+
+                    <div class="security-notice">
+                        <span class="notice-icon">⚠</span>
+                        СИСТЕМА КОНТРОЛИРУЕТСЯ. ВСЕ ПОПЫТКИ ДОСТУПА РЕГИСТРИРУЮТСЯ.
+                    </div>
+
+                    <button type="submit" class="access-btn">
+                        <span class="btn-icon">▶</span>
+                        УСТАНОВИТЬ СВЯЗЬ
+                    </button>
+                </form>
+
+                <div class="form-switch">
+                    <span>ПЕРВИЧНЫЙ ДОСТУП?</span>
+                    <button type="button" id="showRegisterForm">АКТИВИРОВАТЬ УЧЕТНУЮ ЗАПИСЬ</button>
+                </div>
+            </div>
+
+            <!-- Форма регистрации -->
+            <div class="form-container" id="registerFormContainer">
+                <div class="form-header">
+                    <span class="form-title">АКТИВАЦИЯ УЧЕТНОЙ ЗАПИСИ</span>
+                    <span class="form-icon">🛡️</span>
+                </div>
+
+                <form class="access-form" id="registerForm">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="regLastName">ФАМИЛИЯ:</label>
+                            <input type="text" id="regLastName" required 
+                                   placeholder="ПЕТРОВ">
+                        </div>
+                        <div class="input-group">
+                            <label for="regFirstName">ИМЯ:</label>
+                            <input type="text" id="regFirstName" required 
+                                   placeholder="ИВАН">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="regMiddleName">ОТЧЕСТВО:</label>
+                        <input type="text" id="regMiddleName" required 
+                               placeholder="СЕРГЕЕВИЧ">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="regRank">ЗВАНИЕ:</label>
+                        <select id="regRank" required>
+                            <option value="">ВЫБЕРИТЕ ЗВАНИЕ</option>
+                            <option value="ЛЕЙТЕНАНТ">ЛЕЙТЕНАНТ</option>
+                            <option value="СТАРШИЙ ЛЕЙТЕНАНТ">СТАРШИЙ ЛЕЙТЕНАНТ</option>
+                            <option value="КАПИТАН">КАПИТАН</option>
+                            <option value="МАЙОР">МАЙОР</option>
+                            <option value="ПОДПОЛКОВНИК">ПОДПОЛКОВНИК</option>
+                            <option value="ПОЛКОВНИК">ПОЛКОВНИК</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="regPosition">ДОЛЖНОСТЬ:</label>
+                        <select id="regPosition" required>
+                            <option value="">ВЫБЕРИТЕ ДОЛЖНОСТЬ</option>
+                            <option value="ОПЕРАТОР">ОПЕРАТОР</option>
+                            <option value="СТАРШИЙ ОПЕРАТОР">СТАРШИЙ ОПЕРАТОР</option>
+                            <option value="ДИСПЕТЧЕР">ДИСПЕТЧЕР</option>
+                            <option value="ИНЖЕНЕР">ИНЖЕНЕР</option>
+                            <option value="ЛАБОРАНТ">ЛАБОРАНТ</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="regPassword">КОД ДОСТУПА:</label>
+                        <input type="password" id="regPassword" required 
+                               minlength="6"
+                               placeholder="●●●●●●●●">
+                        <div class="password-toggle" id="regPasswordToggle">👁</div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-level" id="passwordStrength"></div>
+                            </div>
+                            <span class="strength-text" id="strengthText">НАДЕЖНОСТЬ КОДА</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="regConfirmPassword">ПОДТВЕРЖДЕНИЕ КОДА:</label>
+                        <input type="password" id="regConfirmPassword" required 
+                               placeholder="●●●●●●●●">
+                        <div class="password-toggle" id="regConfirmPasswordToggle">👁</div>
+                    </div>
+
+                    <div class="security-check">
+                        <input type="checkbox" id="securityAgreement" required>
+                        <label for="securityAgreement">
+                            ПОДТВЕРЖДАЮ ОЗНАКОМЛЕНИЕ С РЕЖИМОМ СЕКРЕТНОСТИ И ПРАВИЛАМИ ОБЪЕКТА 3826
+                        </label>
+                    </div>
+
+                    <button type="submit" class="access-btn">
+                        <span class="btn-icon">⚡</span>
+                        АКТИВИРОВАТЬ УЧЕТНУЮ ЗАПИСЬ
+                    </button>
+                </form>
+
+                <div class="form-switch">
+                    <span>УЖЕ АКТИВИРОВАНЫ?</span>
+                    <button type="button" id="showLoginForm">ВОЙТИ В СИСТЕМУ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Системные сообщения -->
+        <div class="system-messages" id="systemMessages">
+            <!-- Сообщения будут добавляться здесь -->
+        </div>
+
+        <!-- Футер -->
+        <footer class="login-footer">
+            <div class="footer-content">
+                <p>СЕКРЕТНЫЙ ОБЪЕКТ Collective 3826 ■ СИСТЕМА КОНТРОЛЯ ДОСТУПА</p>
+                <div class="security-level">
+                    УРОВЕНЬ СЕКРЕТНОСТИ:
+                    <span class="level-maximum">МАКСИМАЛЬНЫЙ</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
