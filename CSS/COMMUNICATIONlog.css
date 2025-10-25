@@ -1,3 +1,4 @@
+/* ===== СТРАНИЦА АРХИВА ЛОГОВ ===== */
 .archive-controls {
     background: var(--color-soviet-beige);
     border: 1px solid var(--color-soviet-brown);
@@ -13,38 +14,6 @@
 .control-group {
     display: flex;
     gap: 0.5rem;
-}
-
-.filter-btn, .action-btn {
-    background: var(--color-soviet-cream);
-    border: 1px solid var(--color-soviet-brown);
-    color: var(--color-soviet-dark-brown);
-    padding: 8px 12px;
-    font-family: 'Soviet', monospace;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 3px;
-}
-
-.filter-btn:hover, .action-btn:hover {
-    background: var(--color-soviet-light-gray);
-    transform: translateY(-1px);
-}
-
-.filter-btn.active {
-    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
-    color: var(--color-soviet-cream);
-    border-color: var(--color-soviet-dark-red);
-}
-
-.action-btn.danger {
-    background: linear-gradient(135deg, var(--color-soviet-dark-red), var(--color-soviet-brown));
-    color: var(--color-soviet-cream);
-}
-
-.action-btn.danger:hover {
-    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
 }
 
 .archive-footer {
@@ -70,27 +39,6 @@
     gap: 1rem;
 }
 
-.nav-btn {
-    background: var(--color-soviet-cream);
-    border: 1px solid var(--color-soviet-brown);
-    color: var(--color-soviet-dark-brown);
-    padding: 6px 12px;
-    font-family: 'Soviet', monospace;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 3px;
-    font-size: 0.8rem;
-}
-
-.nav-btn:hover:not(:disabled) {
-    background: var(--color-soviet-light-gray);
-}
-
-.nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
 .page-info {
     color: var(--color-soviet-dark-gray);
     font-size: 0.9rem;
@@ -98,7 +46,6 @@
     text-align: center;
 }
 
-/* Адаптивность для страницы истории */
 @media (max-width: 768px) {
     .archive-controls {
         flex-direction: column;
@@ -119,10 +66,5 @@
 @media (max-width: 480px) {
     .control-group {
         flex-wrap: wrap;
-    }
-    
-    .filter-btn, .action-btn {
-        font-size: 0.7rem;
-        padding: 6px 8px;
     }
 }

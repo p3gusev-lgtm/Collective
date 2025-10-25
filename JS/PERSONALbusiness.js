@@ -227,12 +227,12 @@ function generateActivityChart() {
 // Обновление индикатора силы пароля
 function updatePasswordStrength() {
     const password = document.getElementById('newPassword').value;
-    const strengthBar = document.querySelector('.strength-bar::after');
+    const strengthBar = document.querySelector('.strength-level');
     const strengthText = document.querySelector('.strength-text');
     
     let strength = 0;
     let text = 'СЛАБЫЙ';
-    let color = 'var(--color-soviet-red)';
+    let color = 'var(--color-folder-red)';
     
     if (password.length >= 6) strength += 25;
     if (password.length >= 8) strength += 25;
@@ -241,22 +241,23 @@ function updatePasswordStrength() {
     
     if (strength >= 75) {
         text = 'СИЛЬНЫЙ';
-        color = 'var(--color-soviet-dark-gray)';
+        color = 'var(--color-stamp-blue)';
     } else if (strength >= 50) {
         text = 'СРЕДНИЙ';
-        color = 'var(--color-soviet-gold)';
+        color = 'var(--color-gold)';
     }
     
-    // Обновляем стиль через CSS переменные
-    document.documentElement.style.setProperty('--strength-width', `${strength}%`);
-    document.documentElement.style.setProperty('--strength-color', color);
+    // Обновляем индикатор
+    if (strengthBar) {
+        strengthBar.style.setProperty('--strength-width', `${strength}%`);
+        strengthBar.style.setProperty('--strength-color', color);
+        strengthBar.style.width = `${strength}%`;
+        strengthBar.style.background = color;
+    }
     
-    strengthText.textContent = text;
-    
-    // Применяем стиль к псевдоэлементу через CSS классы
-    const strengthBarElement = document.querySelector('.strength-bar');
-    strengthBarElement.style.setProperty('--strength-width', `${strength}%`);
-    strengthBarElement.style.setProperty('--strength-color', color);
+    if (strengthText) {
+        strengthText.textContent = text;
+    }
 }
 
 // Обработка смены пароля

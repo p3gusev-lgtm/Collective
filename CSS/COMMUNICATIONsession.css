@@ -1,81 +1,17 @@
-/* ===== БАЗОВЫЕ СТИЛИ И СБРОС ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --color-soviet-red: #8b0000;
-    --color-soviet-dark-red: #660000;
-    --color-soviet-light-red: #a52a2a;
-    --color-soviet-gray: #708090;
-    --color-soviet-dark-gray: #2f4f4f;
-    --color-soviet-light-gray: #d3d3d3;
-    --color-soviet-beige: #f5f5dc;
-    --color-soviet-dark-beige: #deb887;
-    --color-soviet-brown: #8b7355;
-    --color-soviet-dark-brown: #654321;
-    --color-soviet-cream: #fff8dc;
-    --color-soviet-gold: #daa520;
-    --color-bg-main: #f8f8f8;
-    --color-bg-panel: #f0f0f0;
-    --color-border: #c0c0c0;
-    --color-text: #2f2f2f;
-    --color-text-dim: #696969;
-}
-
-@font-face {
-    font-family: 'Soviet';
-    src: local('Courier New'), local('Consolas'), monospace;
-}
-
+/* ===== СТРАНИЦА СЕССИИ (ЧАТ) ===== */
 body {
-    font-family: 'Soviet', monospace;
     height: 100vh;
     background: linear-gradient(135deg, var(--color-soviet-light-gray) 0%, var(--color-bg-main) 100%);
-    color: var(--color-text);
     display: grid;
-    grid-template-rows: 80px 1fr 60px; /* Фиксированные высоты для header и footer */
+    grid-template-rows: 80px 1fr 60px;
     grid-template-columns: 280px 1fr;
     grid-template-areas: 
         "header header"
         "sidebar main"
         "footer footer";
-    position: relative;
     overflow: hidden;
 }
 
-/* ===== ЭФФЕКТЫ СТАРОЙ БУМАГИ ===== */
-.scanlines {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent 98%,
-        rgba(139, 0, 0, 0.05) 98%
-    );
-    background-size: 100% 20px;
-    pointer-events: none;
-    z-index: 100;
-    opacity: 0.6;
-}
-
-.noise {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.02"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
-    pointer-events: none;
-    z-index: 99;
-}
-
-/* ===== ШАПКА ===== */
 header {
     grid-area: header;
     background: linear-gradient(135deg, var(--color-soviet-dark-gray) 0%, var(--color-soviet-gray) 100%);
@@ -84,8 +20,8 @@ header {
     position: relative;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0; /* Фиксируем высоту header */
-    height: 80px; /* Явно задаем высоту */
+    flex-shrink: 0;
+    height: 80px;
 }
 
 .header-glitch {
@@ -100,15 +36,6 @@ header {
     position: relative;
     z-index: 2;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.glitch-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: var(--color-soviet-red);
-    opacity: 0.3;
-    z-index: 1;
 }
 
 .terminal-status {
@@ -129,7 +56,6 @@ header {
     font-size: 0.8rem;
 }
 
-/* ===== БОКОВОЕ МЕНЮ ===== */
 aside {
     grid-area: sidebar;
     background: var(--color-soviet-beige);
@@ -139,8 +65,8 @@ aside {
     flex-direction: column;
     gap: 1rem;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: calc(100vh - 140px); /* Фиксируем высоту aside */
-    overflow-y: auto; /* Добавляем скролл если контент не помещается */
+    height: calc(100vh - 140px);
+    overflow-y: auto;
 }
 
 .menu-header {
@@ -236,7 +162,6 @@ aside {
     font-weight: bold;
 }
 
-/* ===== ОСНОВНАЯ ОБЛАСТЬ ===== */
 main {
     grid-area: main;
     background: var(--color-bg-main);
@@ -245,8 +170,8 @@ main {
     flex-direction: column;
     position: relative;
     border-left: 1px solid var(--color-border);
-    height: calc(100vh - 140px); /* Фиксируем высоту main */
-    min-height: 0; /* Важно для правильной работы flex внутри */
+    height: calc(100vh - 140px);
+    min-height: 0;
 }
 
 .messages-header {
@@ -301,9 +226,8 @@ main {
     border-radius: 3px;
 }
 
-/* ===== КОНТЕЙНЕР СООБЩЕНИЙ ===== */
 .messages-container {
-    flex: 1; /* Занимает все доступное пространство в main */
+    flex: 1;
     overflow-y: auto;
     margin-bottom: 1rem;
     border: 1px solid var(--color-soviet-brown);
@@ -312,7 +236,7 @@ main {
     position: relative;
     border-radius: 4px;
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
-    min-height: 0; /* Важно для правильного скролла */
+    min-height: 0;
 }
 
 .messages-container::-webkit-scrollbar {
@@ -370,6 +294,8 @@ main {
 .message-text {
     color: var(--color-text);
     line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .system-prefix {
@@ -377,19 +303,6 @@ main {
     font-weight: bold;
 }
 
-.message-text {
-    color: var(--color-text);
-    line-height: 1.4;
-    white-space: pre-wrap; /* Сохраняет переносы строк */
-    word-wrap: break-word;
-}
-
-.system-message .message-text {
-    white-space: pre-wrap; /* Для системных сообщений тоже */
-    word-wrap: break-word;
-}
-
-/* ===== ИНДИКАТОР СКРЫТЫХ СООБЩЕНИЙ ===== */
 .hidden-messages-indicator .system-message {
     background: rgba(139, 0, 0, 0.1);
     border-left: 3px solid var(--color-soviet-gold);
@@ -400,13 +313,6 @@ main {
     color: var(--color-soviet-gold);
 }
 
-/* ===== ОГРАНИЧЕНИЕ ВЫСОТЫ КОНТЕЙНЕРА ===== */
-.messages-container {
-    max-height: 60vh;
-    overflow-y: auto;
-}
-
-/* ===== ФОРМА ВВОДА ===== */
 .input-form {
     background: var(--color-soviet-beige);
     border: 1px solid var(--color-soviet-brown);
@@ -414,7 +320,7 @@ main {
     position: relative;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0; /* Предотвращает сжатие формы */
+    flex-shrink: 0;
 }
 
 .input-header {
@@ -442,24 +348,9 @@ main {
 }
 
 .input-form textarea {
-    width: 100%;
     height: 80px;
-    background: var(--color-soviet-cream);
-    border: 1px solid var(--color-soviet-dark-beige);
-    color: var(--color-text);
-    font-family: 'Soviet', monospace;
-    padding: 10px;
     resize: vertical;
     margin-bottom: 10px;
-    outline: none;
-    transition: all 0.3s ease;
-    border-radius: 3px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.input-form textarea:focus {
-    border-color: var(--color-soviet-red);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(139, 0, 0, 0.1);
 }
 
 .input-footer {
@@ -478,16 +369,9 @@ main {
     color: var(--color-soviet-cream);
     border: none;
     padding: 8px 16px;
-    font-family: 'Soviet', monospace;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     font-weight: bold;
 }
 
@@ -501,7 +385,6 @@ main {
     font-size: 0.9rem;
 }
 
-/* ===== СТИЛИ ДЛЯ ПРИКРЕПЛЕНИЯ ФАЙЛОВ ===== */
 .file-attachment-section {
     background: var(--color-soviet-cream);
     border: 1px solid var(--color-soviet-dark-beige);
@@ -529,12 +412,9 @@ main {
     color: var(--color-soviet-cream);
     border: none;
     padding: 0.4rem 0.8rem;
-    font-family: 'Soviet', monospace;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    transition: all 0.3s ease;
     border-radius: 2px;
     font-size: 0.7rem;
     font-weight: bold;
@@ -609,7 +489,6 @@ main {
     transform: scale(1.1);
 }
 
-/* Стили для отображения файлов в сообщениях */
 .message-files {
     margin-top: 0.5rem;
     padding-top: 0.5rem;
@@ -643,191 +522,18 @@ main {
     font-size: 0.7rem;
 }
 
-/* ===== СТИЛИ ДЛЯ МОДАЛЬНОГО ОКНА ===== */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(2px);
-}
-
-.modal-content {
-    background: var(--color-soviet-beige);
-    border: 2px solid var(--color-soviet-brown);
-    border-radius: 4px;
-    margin: 5% auto;
-    padding: 0;
-    width: 80%;
-    max-width: 700px;
-    max-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.modal-header {
-    background: linear-gradient(135deg, var(--color-soviet-dark-gray), var(--color-soviet-gray));
-    color: var(--color-soviet-cream);
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid var(--color-soviet-red);
-}
-
-.modal-title {
-    font-weight: bold;
-    font-size: 1rem;
-    color: var(--color-soviet-cream);
-}
-
-.close-modal {
-    color: var(--color-soviet-cream);
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 0 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.close-modal:hover {
-    color: var(--color-soviet-red);
-    transform: scale(1.1);
-}
-
-.modal-body {
-    padding: 1rem;
-    flex: 1;
-    overflow-y: auto;
-    background: var(--color-soviet-cream);
-}
-
-.modal-files-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.8rem;
-    padding: 0.5rem;
-}
-
-.modal-file-item {
-    background: var(--color-soviet-beige);
-    border: 1px solid var(--color-soviet-dark-beige);
-    border-radius: 3px;
-    padding: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.modal-file-item:hover {
-    border-color: var(--color-soviet-red);
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.modal-file-item.selected {
-    border-color: var(--color-soviet-red);
-    background: rgba(139, 0, 0, 0.05);
-}
-
-.modal-file-checkbox {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 16px;
-    height: 16px;
-    accent-color: var(--color-soviet-red);
-}
-
-.modal-file-icon {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.modal-file-name {
-    font-size: 0.8rem;
-    color: var(--color-soviet-dark-gray);
-    word-break: break-word;
-    margin-bottom: 0.3rem;
-}
-
-.modal-file-size {
-    font-size: 0.7rem;
-    color: var(--color-soviet-gray);
-}
-
-.modal-file-type {
-    font-size: 0.7rem;
-    color: var(--color-soviet-red);
-    text-transform: uppercase;
-}
-
-.modal-footer {
-    padding: 1rem;
-    background: var(--color-soviet-cream);
-    border-top: 1px solid var(--color-soviet-dark-beige);
-    text-align: right;
-}
-
-.modal-confirm-btn {
-    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
-    color: var(--color-soviet-cream);
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-family: 'Soviet', monospace;
-    cursor: pointer;
-    border-radius: 3px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.modal-confirm-btn:hover {
-    background: linear-gradient(135deg, var(--color-soviet-dark-red), var(--color-soviet-red));
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.no-files-message {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 2rem;
-    color: var(--color-soviet-gray);
-    font-style: italic;
-}
-
-/* Адаптивность для модального окна */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
-    }
-    
-    .modal-files-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Индикатор наличия вложений в сообщении */
 .message-has-attachments::after {
     content: " 📎";
     font-size: 0.8rem;
 }
 
-/* ===== ПОДВАЛ ===== */
 footer {
     grid-area: footer;
     background: linear-gradient(135deg, var(--color-soviet-dark-gray) 0%, var(--color-soviet-gray) 100%);
     border-top: 3px solid var(--color-soviet-red);
     padding: 1rem;
-    flex-shrink: 0; /* Фиксируем высоту footer */
-    height: 60px; /* Явно задаем высоту */
+    flex-shrink: 0;
+    height: 60px;
 }
 
 .footer-content {
@@ -847,13 +553,6 @@ footer {
     font-weight: bold;
 }
 
-/* ===== АНИМАЦИИ ===== */
-@keyframes scanline {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(100vh); }
-}
-
-/* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
     body {
         grid-template-columns: 1fr;
@@ -884,11 +583,6 @@ footer {
 }
 
 @media (max-width: 480px) {
-    header, main, aside, footer {
-        padding: 0.8rem;
-    }
-    
-    .input-form textarea {
-        height: 60px;
-    }
+    header, main, aside, footer { padding: 0.8rem; }
+    .input-form textarea { height: 60px; }
 }

@@ -1,10 +1,37 @@
-// ===== СИСТЕМА АУТЕНТИФИКАЦИИ ОБЪЕКТА 3826 =====
+/**
+ * @file index.js
+ * @brief Система аутентификации объекта 3826
+ * @details
+ * Реализует функционал:
+ * - Вход зарегистрированных операторов
+ * - Регистрация новых операторов
+ * - Валидация и проверка данных
+ * - Локал сторадж для хранения данных
+ * 
+ * @section data_storage Структура хранения данных
+ * Операторы хранятся в localStorage по ключу 'operators_3826'
+ * Текущий оператор - 'currentOperator_3826'
+ * Данные для личного дела - 'operatorData_3826'
+ */
 
 let currentForm = 'login';
 let operatorCounter = 1;
 
-// Инициализация системы
+/** 
+ * @brief Инициализация системы логина
+ * @function initLoginSystem
+ * @details Выполняет первичную настройку системы при загрузке страницы
+ * 
+ * @code
+ * // Последовательность инициализации:
+ * 1. initSystem() - базовые системные функции
+ * 2. setupEventListeners() - обработчики событий
+ * 3. loadExistingOperators() - загрузка операторов из памяти
+ * 4. updateSystemDate() - установка текущей даты
+ * @endcode
+ */
 function initLoginSystem() {
+    // Аналог инициализации периферии в STM32
     initSystem();
     setupEventListeners();
     loadExistingOperators();
@@ -17,9 +44,15 @@ function initSystem() {
     setInterval(updateSystemStatus, 2000);
 }
 
-// Обновление системной даты
+/**
+ * @brief Обновление системной даты
+ * @function updateSystemDate
+ * @details Форматирует и отображает текущую дату/время
+ * 
+ * @note Аналог работы с RTC в микроконтроллерах
+ */
 function updateSystemDate() {
-    const now = new Date();
+    const now = new Date(); // Получение времени (как чтение RTC)
     const options = { 
         day: '2-digit', 
         month: '2-digit', 
@@ -97,24 +130,35 @@ function togglePasswordVisibility(event) {
     }
 }
 
-// Проверка силы пароля
+/**
+ * @brief Проверка надежности пароля
+ * @function checkPasswordStrength
+ * @details Анализирует сложность пароля по критериям:
+ * - Длина (6+ символов)
+ * - Наличие заглавных букв
+ * - Наличие цифр
+ * - Специальные символы
+ * 
+ * @return {void} Визуально отображает уровень надежности
+ */
 function checkPasswordStrength() {
     const password = document.getElementById('regPassword').value;
     const strengthBar = document.getElementById('passwordStrength');
     const strengthText = document.getElementById('strengthText');
     
+    // Логика проверки аналогична валидации данных в embedded
     let strength = 0;
     let text = 'СЛАБЫЙ';
     let className = 'weak';
     
     // Проверка длины
-    if (password.length >= 6) strength += 1;
+    if (password.length >= 6) strength += 1; // Базовый критерий
     if (password.length >= 8) strength += 1;
     
     // Проверка сложности
     if (/[A-Z]/.test(password)) strength += 1;
     if (/[0-9]/.test(password)) strength += 1;
-    if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+    if (/[^A-Za-z0-9]/.test(password)) strength += 1; // Дополнительные критерии
     
     if (strength >= 4) {
         text = 'СИЛЬНЫЙ';
@@ -128,18 +172,37 @@ function checkPasswordStrength() {
     strengthText.textContent = text;
 }
 
-// Генерация ID оператора
+/**
+ * @brief Генерация ID оператора
+ * @function generateOperatorId
+ * @details Создает уникальный идентификатор формата OP-3826-XXX
+ * 
+ * @note Принцип аналогичен генерации UUID в embedded системах
+ */
 function generateOperatorId() {
     const position = document.getElementById('regPosition').value;
     if (position) {
-        const id = `OP-3826-${operatorCounter.toString().padStart(3, '0')}`;
+        const id = `OP-3826-${operatorCounter.toString().padStart(3, '0')}`; // Разобраться как менять роль OP-... и отдел ...-3826-...
+        // padStart - аналог форматирования вывода в printf
         showSystemAlert(`ВАШ ИДЕНТИФИКАТОР: ${id}`, 'info');
     }
 }
 
-// Обработка входа
+/**
+ * @brief Обработчик входа в систему
+ * @function handleLogin
+ * @param {Event} event - Событие отправки формы
+ * 
+ * @details Процесс аутентификации:
+ * 1. Валидация входных данных (как проверка CRC)
+ * 2. Поиск оператора в "базе данных" (localStorage)
+ * 3. Проверка совпадения пароля
+ * 4. Перенаправление при успехе
+ * 
+ * @warning Все попытки доступа логируются (аналог watchdog)
+ */
 function handleLogin(event) {
-    event.preventDefault();
+    event.preventDefault(); // Предотвращение перезагрузки (как обработчик прерывания)
     
     const identifier = document.getElementById('loginIdentifier').value;
     const password = document.getElementById('loginPassword').value;
@@ -150,13 +213,13 @@ function handleLogin(event) {
         return;
     }
     
-    // Проверка формата идентификатора
+    // Валидация - аналог проверки целостности данных в STM32
     if (!/^OP-3826-\d{3}$/.test(identifier)) {
         showSystemAlert('НЕВЕРНЫЙ ФОРМАТ ИДЕНТИФИКАТОРА', 'error');
         return;
     }
     
-    // Поиск оператора
+    // Поиск в "базе данных" - аналог поиска во flash-памяти
     const operators = JSON.parse(localStorage.getItem('operators_3826') || '[]');
     const operator = operators.find(op => op.id === identifier && op.password === password);
     

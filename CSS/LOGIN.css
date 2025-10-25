@@ -1,0 +1,529 @@
+/* ===== СТРАНИЦА ВХОДА - ПАПКА ЛИЧНОГО ДЕЛА ===== */
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, 
+        var(--color-paper-yellow) 0%, 
+        var(--color-paper-dark-yellow) 50%,
+        var(--color-paper-yellow) 100%);
+    display: block; /* Меняем flex на block для нормальной прокрутки */
+    overflow-x: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+    margin: 0 auto; /* Центрируем контейнер вместо flex-центрирования */
+    min-height: auto; /* Убираем фиксированную высоту */
+}
+
+/* Заголовок как обложка папки */
+.system-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: var(--color-folder-red);
+    border: 3px solid var(--color-folder-dark-red);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        4px 4px 8px var(--color-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    font-family: 'SovietMono', monospace;
+}
+
+.system-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--color-gold), 
+        transparent);
+}
+
+.system-header::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    background: var(--color-white);
+    border: 2px solid var(--color-ink-black);
+    border-radius: 50%;
+    opacity: 0.1;
+}
+
+.header-glitch {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.header-glitch h1 {
+    color: var(--color-white);
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px var(--color-shadow);
+    font-weight: bold;
+    font-family: 'SovietMono', monospace;
+}
+
+.glitch-text {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: var(--color-gold);
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.system-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--color-white);
+}
+
+.status-indicator {
+    color: var(--color-gold);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px var(--color-shadow);
+}
+
+.date-display {
+    color: var(--color-white);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-family: 'SovietMono', monospace;
+}
+
+/* Формы как листы в папке */
+.access-forms {
+    position: relative;
+    min-height: auto; /* Убираем фиксированную высоту */
+    margin-bottom: 2rem; /* Добавляем отступ снизу */
+}
+
+.form-container {
+    display: none;
+    background: var(--color-white);
+    border: 2px solid var(--color-line-brown);
+    border-radius: 2px;
+    padding: 2rem;
+    box-shadow: 
+        3px 3px 6px var(--color-shadow),
+        inset 0 0 20px rgba(139, 115, 85, 0.1);
+    position: relative;
+    font-family: 'SovietType', serif;
+    margin-bottom: 1rem; /* Отступ между формами если они будут видны одновременно */
+}
+
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        var(--color-folder-red), 
+        var(--color-gold), 
+        var(--color-folder-red));
+}
+
+.form-container::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-line-brown);
+    border-radius: 50%;
+    opacity: 0.1;
+}
+
+.form-container.active {
+    display: block;
+    animation: formAppear 0.6s ease;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-line-brown);
+    position: relative;
+}
+
+.form-header::after {
+    content: '•••';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-line-brown);
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+}
+
+.form-title {
+    color: var(--color-folder-red);
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'SovietMono', monospace;
+}
+
+.form-icon {
+    font-size: 1.8rem;
+    color: var(--color-folder-red);
+    opacity: 0.8;
+}
+
+.access-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.input-hint {
+    color: var(--color-ink-gray);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    font-style: italic;
+    text-align: right;
+    border-top: 1px dotted var(--color-line-brown);
+    padding-top: 0.2rem;
+}
+
+.password-strength {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(139, 115, 85, 0.05);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 1px;
+}
+
+.strength-bar {
+    height: 6px;
+    background: var(--color-paper-yellow);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.strength-level {
+    height: 100%;
+    width: 0%;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.strength-level.weak { 
+    width: 33%; 
+    background: var(--color-folder-red);
+}
+
+.strength-level.medium { 
+    width: 66%; 
+    background: var(--color-gold);
+}
+
+.strength-level.strong { 
+    width: 100%; 
+    background: var(--color-stamp-blue);
+}
+
+.strength-text {
+    color: var(--color-ink-black);
+    font-size: 0.8rem;
+    text-align: center;
+    display: block;
+    text-transform: uppercase;
+    font-family: 'SovietMono', monospace;
+    font-weight: bold;
+}
+
+.security-notice {
+    background: rgba(139, 0, 0, 0.05);
+    border: 2px solid var(--color-folder-red);
+    border-radius: 1px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-black);
+    position: relative;
+    font-family: 'SovietMono', monospace;
+}
+
+.security-notice::before {
+    content: '!';
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: var(--color-white);
+    color: var(--color-folder-red);
+    font-weight: bold;
+    padding: 0 5px;
+    font-size: 1.2rem;
+}
+
+.notice-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    color: var(--color-folder-red);
+}
+
+.security-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: rgba(139, 115, 85, 0.05);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.security-check:has(input:checked) {
+    background: rgba(30, 58, 95, 0.05);
+    border-color: var(--color-stamp-blue);
+}
+
+.security-check input[type="checkbox"] {
+    margin-top: 0.2rem;
+    transform: scale(1.3);
+    accent-color: var(--color-folder-red);
+}
+
+.security-check label {
+    color: var(--color-ink-black);
+    font-size: 0.9rem;
+    line-height: 1.3;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+}
+
+.form-switch {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--color-line-brown);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--color-ink-gray);
+    position: relative;
+}
+
+.form-switch::before {
+    content: '↕';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-white);
+    color: var(--color-line-brown);
+    padding: 0 10px;
+    font-size: 1.2rem;
+}
+
+.form-switch button {
+    background: none;
+    border: none;
+    color: var(--color-folder-red);
+    cursor: pointer;
+    font-family: 'SovietMono', monospace;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.form-switch button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-folder-red);
+    transition: width 0.3s ease;
+}
+
+.form-switch button:hover {
+    color: var(--color-folder-dark-red);
+}
+
+.form-switch button:hover::after {
+    width: 100%;
+}
+
+.system-messages {
+    margin-top: 1.5rem;
+    min-height: 80px;
+}
+
+.login-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 3px double var(--color-line-brown);
+    position: relative;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-content p {
+    color: var(--color-ink-gray);
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    font-family: 'SovietMono', monospace;
+}
+
+.security-level {
+    color: var(--color-ink-black);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-family: 'SovietMono', monospace;
+    font-weight: bold;
+    padding: 0.5rem;
+    background: var(--color-white);
+    border: 2px solid var(--color-folder-red);
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.level-maximum {
+    color: var(--color-folder-red);
+    font-weight: bold;
+}
+
+/* Адаптивность для LOGIN */
+@media (max-width: 768px) {
+    .login-container { 
+        padding: 1rem; 
+        max-width: 100%;
+    }
+    
+    .system-header { 
+        padding: 1.5rem; 
+        margin-bottom: 1.5rem;
+    }
+    
+    .header-glitch h1 { 
+        font-size: 1.8rem; 
+        letter-spacing: 1px;
+    }
+    
+    .form-container { 
+        padding: 1.5rem; 
+    }
+    
+    .system-status { 
+        flex-direction: column; 
+        gap: 0.5rem; 
+        text-align: center; 
+    }
+    
+    .input-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container { 
+        padding: 1rem; 
+    }
+    
+    .form-header { 
+        flex-direction: column; 
+        gap: 0.5rem; 
+        text-align: center; 
+    }
+    
+    .access-btn { 
+        padding: 1rem; 
+        font-size: 0.9rem; 
+    }
+    
+    .form-switch { 
+        flex-direction: column; 
+        gap: 0.5rem; 
+    }
+    
+    .header-glitch h1 {
+        font-size: 1.5rem;
+    }
+    
+    body {
+        padding: 10px;
+    }
+}
+
+/* Дополнительные исправления для прокрутки */
+@media (max-height: 800px) {
+    .login-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .system-header {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .form-container {
+        padding: 1rem;
+    }
+}
+
+/* Убедимся, что body прокручивается */
+html {
+    overflow-y: scroll;
+}
+
+body {
+    overflow-y: auto;
+}
+}

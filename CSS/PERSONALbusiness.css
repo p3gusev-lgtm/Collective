@@ -1,17 +1,17 @@
-/* ===== СТИЛИ СТРАНИЦЫ ЛИЧНОГО ДЕЛА ===== */
-
+/* ===== СТРАНИЦА ЛИЧНОГО ДЕЛА - СТИЛЬ СОВЕТСКОЙ ПАПКИ ===== */
 .personal-file-header {
-    background: var(--color-soviet-beige);
-    border: 1px solid var(--color-soviet-brown);
+    background: var(--color-white);
+    border: 2px solid var(--color-folder-red);
+    border-radius: 3px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
+    box-shadow: 3px 3px 6px var(--color-shadow);
+    font-family: 'SovietMono', monospace;
 }
 
 .personal-file-header::before {
@@ -21,7 +21,10 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--color-soviet-red), var(--color-soviet-dark-red));
+    background: linear-gradient(90deg, 
+        var(--color-folder-red), 
+        var(--color-gold), 
+        var(--color-folder-red));
 }
 
 .file-title {
@@ -31,16 +34,20 @@
 }
 
 .main-title {
-    color: var(--color-soviet-red);
-    font-size: 1.3rem;
+    color: var(--color-folder-red);
+    font-size: 1.4rem;
     font-weight: bold;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'SovietMono', monospace;
 }
 
 .subtitle {
-    color: var(--color-soviet-dark-gray);
+    color: var(--color-ink-gray);
     font-size: 0.8rem;
     font-style: italic;
+    border-bottom: 1px dotted var(--color-line-brown);
+    padding-bottom: 0.2rem;
 }
 
 .clearance-level {
@@ -51,32 +58,36 @@
 }
 
 .clearance-badge {
-    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
-    color: var(--color-soviet-cream);
+    background: var(--color-folder-red);
+    color: var(--color-white);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 4px var(--color-shadow);
+    border: 1px solid var(--color-folder-dark-red);
+    font-family: 'SovietMono', monospace;
 }
 
 .clearance-text {
     font-size: 0.7rem;
+    text-transform: uppercase;
 }
 
 .clearance-type {
     font-size: 1rem;
+    letter-spacing: 1px;
 }
 
 .clearance-info {
-    color: var(--color-soviet-dark-gray);
+    color: var(--color-ink-gray);
     font-size: 0.7rem;
     text-align: center;
+    font-style: italic;
 }
 
-/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
 .personal-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -84,21 +95,22 @@
     margin-bottom: 1rem;
 }
 
-.info-column,
-.stats-column {
+.info-column, .stats-column {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-/* ===== КАРТОЧКИ ИНФОРМАЦИИ ===== */
 .info-card {
-    background: var(--color-soviet-cream);
-    border: 1px solid var(--color-soviet-brown);
-    border-radius: 4px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 2px;
     padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+        2px 2px 4px var(--color-shadow),
+        inset 0 0 20px rgba(139, 115, 85, 0.05);
     position: relative;
+    font-family: 'SovietType', serif;
 }
 
 .info-card::before {
@@ -108,24 +120,20 @@
     left: 0;
     width: 4px;
     height: 100%;
-    background: var(--color-soviet-dark-gray);
-    border-radius: 4px 0 0 4px;
+    border-radius: 2px 0 0 2px;
 }
 
-.personal-info::before {
-    background: var(--color-soviet-red);
+.personal-info::before { 
+    background: var(--color-folder-red); 
 }
-
-.system-info::before {
-    background: var(--color-soviet-dark-gray);
+.system-info::before { 
+    background: var(--color-stamp-blue); 
 }
-
-.stats-card::before {
-    background: var(--color-soviet-gold);
+.stats-card::before { 
+    background: var(--color-gold); 
 }
-
-.actions-card::before {
-    background: var(--color-soviet-gray);
+.actions-card::before { 
+    background: var(--color-line-brown); 
 }
 
 .card-header {
@@ -134,21 +142,36 @@
     align-items: center;
     margin-bottom: 1.2rem;
     padding-bottom: 0.8rem;
-    border-bottom: 1px solid var(--color-soviet-dark-beige);
+    border-bottom: 2px solid var(--color-line-brown);
+    position: relative;
+}
+
+.card-header::after {
+    content: '···';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-line-brown);
+    font-size: 1rem;
+    letter-spacing: 3px;
 }
 
 .card-title {
-    color: var(--color-soviet-dark-gray);
+    color: var(--color-folder-red);
     font-size: 1rem;
     font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'SovietMono', monospace;
+    letter-spacing: 0.5px;
 }
 
 .card-icon {
     font-size: 1.2rem;
-    opacity: 0.7;
+    color: var(--color-folder-red);
+    opacity: 0.8;
 }
 
-/* ===== СЕТКИ ИНФОРМАЦИИ ===== */
 .info-grid {
     display: flex;
     flex-direction: column;
@@ -160,7 +183,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0;
-    border-bottom: 1px dashed var(--color-soviet-light-gray);
+    border-bottom: 1px dashed var(--color-line-brown);
+    position: relative;
 }
 
 .info-item:last-child {
@@ -168,26 +192,32 @@
 }
 
 .info-label {
-    color: var(--color-soviet-dark-gray);
+    color: var(--color-ink-black);
     font-size: 0.8rem;
     font-weight: bold;
     flex: 1;
+    font-family: 'SovietMono', monospace;
+    text-transform: uppercase;
 }
 
 .info-value {
-    color: var(--color-text);
+    color: var(--color-ink-black);
     font-size: 0.9rem;
     flex: 1;
     text-align: right;
-    font-family: 'Courier New', monospace;
+    font-family: 'SovietType', serif;
+    background: rgba(139, 115, 85, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 1px;
+    border: 1px solid transparent;
 }
 
 .status-active {
-    color: var(--color-soviet-red);
+    color: var(--color-folder-red);
     font-weight: bold;
+    font-family: 'SovietMono', monospace;
 }
 
-/* ===== СТАТИСТИКА ===== */
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -196,42 +226,74 @@
 }
 
 .stat-item {
-    background: var(--color-soviet-beige);
-    border: 1px solid var(--color-soviet-dark-beige);
-    border-radius: 3px;
+    background: var(--color-paper-yellow);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 2px;
     padding: 1rem;
     text-align: center;
+    position: relative;
+    box-shadow: inset 1px 1px 3px var(--color-shadow);
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--color-line-brown), 
+        transparent);
 }
 
 .stat-label {
     display: block;
-    color: var(--color-soviet-dark-gray);
+    color: var(--color-ink-gray);
     font-size: 0.7rem;
     margin-bottom: 0.5rem;
     font-weight: bold;
+    font-family: 'SovietMono', monospace;
+    text-transform: uppercase;
 }
 
 .stat-value {
     display: block;
-    color: var(--color-soviet-red);
+    color: var(--color-folder-red);
     font-size: 1.5rem;
     font-weight: bold;
     font-family: 'Courier New', monospace;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== ГРАФИК АКТИВНОСТИ ===== */
 .activity-chart {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--color-soviet-dark-beige);
+    border-top: 2px solid var(--color-line-brown);
+    position: relative;
+}
+
+.activity-chart::before {
+    content: '↕';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-white);
+    color: var(--color-line-brown);
+    padding: 0 10px;
+    font-size: 1rem;
 }
 
 .chart-header {
-    color: var(--color-soviet-dark-gray);
+    color: var(--color-ink-gray);
     font-size: 0.8rem;
     font-weight: bold;
     margin-bottom: 0.8rem;
     text-align: center;
+    text-transform: uppercase;
+    font-family: 'SovietMono', monospace;
 }
 
 .chart-bars {
@@ -240,20 +302,26 @@
     align-items: flex-end;
     height: 80px;
     gap: 0.3rem;
+    padding: 0.5rem;
+    background: var(--color-paper-yellow);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 1px;
 }
 
 .chart-bar {
     flex: 1;
-    background: linear-gradient(to top, var(--color-soviet-red), var(--color-soviet-dark-red));
+    background: linear-gradient(to top, var(--color-folder-red), var(--color-folder-dark-red));
     border-radius: 2px 2px 0 0;
     position: relative;
     min-width: 20px;
     transition: all 0.3s ease;
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .chart-bar:hover {
     opacity: 0.8;
     transform: scaleY(1.05);
+    background: linear-gradient(to top, var(--color-folder-dark-red), var(--color-folder-red));
 }
 
 .chart-label {
@@ -262,11 +330,11 @@
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.6rem;
-    color: var(--color-soviet-gray);
+    color: var(--color-ink-gray);
     white-space: nowrap;
+    font-family: 'SovietMono', monospace;
 }
 
-/* ===== КНОПКИ ДЕЙСТВИЙ ===== */
 .actions-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -274,35 +342,56 @@
 }
 
 .action-btn {
-    background: linear-gradient(135deg, var(--color-soviet-gray), var(--color-soviet-dark-gray));
-    color: var(--color-soviet-cream);
-    border: 1px solid var(--color-soviet-dark-gray);
+    background: var(--color-white);
+    border: 1px solid var(--color-line-brown);
+    color: var(--color-ink-black);
     padding: 0.8rem 1rem;
-    font-family: 'Soviet', monospace;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    transition: all 0.3s ease;
-    border-radius: 3px;
+    border-radius: 1px;
     font-size: 0.8rem;
     font-weight: bold;
     text-align: left;
+    transition: all 0.3s ease;
+    font-family: 'SovietMono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 1px 1px 3px var(--color-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(139, 115, 85, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.action-btn:hover::before {
+    left: 100%;
 }
 
 .action-btn:hover {
-    background: linear-gradient(135deg, var(--color-soviet-dark-gray), var(--color-soviet-gray));
-    transform: translateY(-2px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background: var(--color-paper-yellow);
+    border-color: var(--color-folder-red);
+    transform: translateY(-1px);
+    box-shadow: 2px 2px 6px var(--color-shadow);
 }
 
 .action-btn.warning {
-    background: linear-gradient(135deg, var(--color-soviet-red), var(--color-soviet-dark-red));
-    border-color: var(--color-soviet-dark-red);
+    background: var(--color-folder-red);
+    color: var(--color-white);
+    border-color: var(--color-folder-dark-red);
 }
 
 .action-btn.warning:hover {
-    background: linear-gradient(135deg, var(--color-soviet-dark-red), var(--color-soviet-red));
+    background: var(--color-folder-dark-red);
 }
 
 .btn-icon {
@@ -310,7 +399,87 @@
     flex-shrink: 0;
 }
 
-/* ===== МОДАЛЬНОЕ ОКНО СМЕНЫ ПАРОЛЯ ===== */
+/* Модальные окна в стиле папки */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: var(--color-white);
+    border: 2px solid var(--color-folder-red);
+    border-radius: 3px;
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 5px 5px 15px var(--color-shadow);
+    position: relative;
+    font-family: 'SovietType', serif;
+}
+
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        var(--color-folder-red), 
+        var(--color-gold), 
+        var(--color-folder-red));
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--color-paper-yellow);
+    border-bottom: 1px solid var(--color-line-brown);
+}
+
+.modal-title {
+    color: var(--color-folder-red);
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: 'SovietMono', monospace;
+    text-transform: uppercase;
+}
+
+.close-modal {
+    color: var(--color-folder-red);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--color-folder-dark-red);
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    background: var(--color-paper-yellow);
+    border-top: 1px solid var(--color-line-brown);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
 .password-form {
     display: flex;
     flex-direction: column;
@@ -324,96 +493,149 @@
 }
 
 .form-group label {
-    color: var(--color-soviet-dark-gray);
+    color: var(--color-ink-black);
     font-size: 0.8rem;
     font-weight: bold;
+    font-family: 'SovietMono', monospace;
+    text-transform: uppercase;
+    border-bottom: 1px dotted var(--color-line-brown);
+    padding-bottom: 0.2rem;
 }
 
 .form-group input {
-    background: var(--color-soviet-cream);
-    border: 1px solid var(--color-soviet-dark-beige);
-    border-radius: 3px;
-    padding: 0.6rem;
-    font-family: 'Soviet', monospace;
-    color: var(--color-text);
+    background: var(--color-white);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 1px;
+    padding: 0.8rem;
+    font-family: 'SovietType', serif;
+    color: var(--color-ink-black);
     transition: all 0.3s ease;
+    box-shadow: inset 1px 1px 3px var(--color-shadow);
 }
 
 .form-group input:focus {
-    border-color: var(--color-soviet-red);
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1);
+    border-color: var(--color-folder-red);
+    box-shadow: 
+        inset 1px 1px 3px var(--color-shadow),
+        0 0 0 2px rgba(139, 0, 0, 0.1);
+    background: var(--color-paper-yellow);
 }
 
 .password-strength {
     margin-top: 1rem;
     padding: 0.8rem;
-    background: var(--color-soviet-beige);
-    border-radius: 3px;
+    background: var(--color-paper-yellow);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 1px;
     text-align: center;
 }
 
 .strength-bar {
-    height: 4px;
-    background: var(--color-soviet-light-gray);
-    border-radius: 2px;
-    margin-bottom: 0.5rem;
-    overflow: hidden;
-}
-
-.strength-bar::after {
-    content: '';
-    display: block;
-    height: 100%;
-    width: 0%;
-    background: var(--color-soviet-red);
-    transition: width 0.3s ease;
-}
-
-.strength-text {
-    color: var(--color-soviet-gray);
-    font-size: 0.7rem;
-}
-
-.modal-cancel-btn {
-    background: var(--color-soviet-gray);
-    color: var(--color-soviet-cream);
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-family: 'Soviet', monospace;
-    cursor: pointer;
+    height: 6px;
+    background: var(--color-paper-dark-yellow);
     border-radius: 3px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    margin-right: 0.5rem;
-}
-
-.modal-cancel-btn:hover {
-    background: var(--color-soviet-dark-gray);
-}
-
-/* Добавьте в конец файла */
-.strength-bar {
-    height: 4px;
-    background: var(--color-soviet-light-gray);
-    border-radius: 2px;
     margin-bottom: 0.5rem;
     overflow: hidden;
     position: relative;
+    border: 1px solid var(--color-line-brown);
 }
 
-.strength-bar::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+.strength-level {
     height: 100%;
     width: var(--strength-width, 0%);
-    background: var(--strength-color, var(--color-soviet-red));
+    background: var(--strength-color, var(--color-folder-red));
+    border-radius: 2px;
     transition: all 0.3s ease;
 }
 
-/* ===== АДАПТИВНОСТЬ ===== */
+.strength-text {
+    color: var(--color-ink-gray);
+    font-size: 0.7rem;
+    font-family: 'SovietMono', monospace;
+    text-transform: uppercase;
+}
+
+.modal-cancel-btn, .modal-confirm-btn {
+    background: var(--color-white);
+    border: 1px solid var(--color-line-brown);
+    color: var(--color-ink-black);
+    padding: 0.6rem 1.2rem;
+    border-radius: 1px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-family: 'SovietMono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 1px 1px 3px var(--color-shadow);
+}
+
+.modal-cancel-btn:hover {
+    background: var(--color-paper-yellow);
+    border-color: var(--color-ink-gray);
+}
+
+.modal-confirm-btn {
+    background: var(--color-folder-red);
+    color: var(--color-white);
+    border-color: var(--color-folder-dark-red);
+}
+
+.modal-confirm-btn:hover {
+    background: var(--color-folder-dark-red);
+}
+
+/* Системные уведомления */
+.system-message {
+    background: var(--color-white);
+    border: 1px solid var(--color-line-brown);
+    border-left: 4px solid var(--color-folder-red);
+    border-radius: 2px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    animation: alertAppear 0.3s ease;
+    position: relative;
+    box-shadow: 2px 2px 4px var(--color-shadow);
+    font-family: 'SovietMono', monospace;
+}
+
+.system-message.success {
+    border-left-color: var(--color-stamp-blue);
+    background: rgba(30, 58, 95, 0.05);
+}
+
+.system-message.error {
+    border-left-color: var(--color-folder-red);
+    background: rgba(139, 0, 0, 0.05);
+}
+
+.message-time {
+    color: var(--color-ink-gray);
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+}
+
+.message-text {
+    color: var(--color-ink-black);
+    font-size: 0.8rem;
+}
+
+.system-prefix {
+    color: var(--color-folder-red);
+    font-weight: bold;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Адаптивность */
 @media (max-width: 1024px) {
     .personal-content {
         grid-template-columns: 1fr;
@@ -421,7 +643,7 @@
     }
     
     .stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
@@ -440,6 +662,7 @@
     
     .info-value {
         text-align: left;
+        width: 100%;
     }
     
     .chart-bars {
@@ -458,24 +681,28 @@
         text-align: center;
         margin-top: 0.2rem;
     }
-}
-
-@media (max-width: 480px) {
-    .personal-file-header,
-    .info-card {
-        padding: 1rem;
-    }
-    
-    .main-title {
-        font-size: 1.1rem;
-    }
     
     .stats-grid {
         grid-template-columns: 1fr;
     }
+}
+
+@media (max-width: 480px) {
+    .personal-file-header, .info-card { 
+        padding: 1rem; 
+    }
     
-    .action-btn {
-        font-size: 0.7rem;
-        padding: 0.6rem 0.8rem;
+    .main-title { 
+        font-size: 1.1rem; 
+    }
+    
+    .action-btn { 
+        font-size: 0.7rem; 
+        padding: 0.6rem 0.8rem; 
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
     }
 }
