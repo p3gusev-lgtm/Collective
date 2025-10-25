@@ -1,25 +1,4 @@
-<!--
-@file index.html
-@brief Главная страница системы доступа Collective 3826
-@details
-Содержит две формы:
-- Аутентификация оператора (вход в систему)
-- Активация учетной записи (регистрация)
- 
-Особенности:
-- Валидация данных на стороне клиента
-- Адаптивный дизайн
-- Эффекты старинного интерфейса
- 
-@section html_structure Структура HTML
-1. Системный заголовок с датой и статусом
-2. Контейнер форм доступа
-3. Системные сообщения
-4. Футер с уровнем секретности
--->
-
 <!DOCTYPE html>
-
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
@@ -29,156 +8,187 @@
         <link rel="stylesheet" href="css/LOGIN.css">
     </head>
 
-    <body>
+    <body class="atomic-body">
+        <div class="body-texture"></div>
         <div class="scanlines"></div>
         <div class="noise"></div>
-        <div class="radiation-symbol">☢</div>
-        <div class="paper-texture"></div>
-        <div class="paper-creased"></div>
+        <div class="cross-mark cross-mark-tl"></div>
+        <div class="cross-mark cross-mark-tr"></div>
+        <div class="cross-mark cross-mark-bl"></div>
+        <div class="cross-mark cross-mark-br"></div>
 
-        <div class="login-container">
-            <!-- Заголовок системы -->
-            <div class="system-header">
-                <div class="header-glitch">
-                    <h1>Collective 3826</h1>
-                    <div class="glitch-text">Collective 3826</div>
+        <div class="login-container atomic-container">
+            <!-- Заголовок системы в стиле Atomic Heart -->
+            <div class="system-header atomic-header">
+                <div class="header-glitch atomic-glitch">
+                    <h1 class="atomic-heading atomic-heading-h1">Collective 3826</h1>
+                    <div class="glitch-text atomic-glitch-layer">Collective 3826</div>
                 </div>
-                <div class="system-status">
-                    <span class="status-indicator">■ СИСТЕМА ДОСТУПА АКТИВНА</span>
-                    <span class="date-display" id="currentDate"></span>
+                <div class="system-status atomic-status">
+                    <span class="status-indicator status-atomic">■ СИСТЕМА ДОСТУПА АКТИВНА</span>
+                    <span class="date-display atomic-date" id="currentDate"></span>
                 </div>
             </div>
+
             <!-- Основной контейнер форм -->
-            <div class="access-forms">
+            <div class="access-forms atomic-forms">
                 <!-- Форма входа -->
-                <div class="form-container active" id="loginFormContainer">
-                    <div class="form-header">
-                        <span class="form-title">АУТЕНТИФИКАЦИЯ ОПЕРАТОРА</span>
-                        <span class="form-icon">🔐</span>
+                <div class="form-container card-atomic active" id="loginFormContainer">
+                    <div class="card-atomic-header">
+                        <div class="form-header atomic-form-header">
+                            <span class="form-title atomic-heading atomic-heading-h3">АУТЕНТИФИКАЦИЯ ОПЕРАТОРА</span>
+                            <span class="form-icon">🔐</span>
+                        </div>
                     </div>
-                    <form class="access-form" id="loginForm">
-                        <div class="input-group">
-                            <label for="loginIdentifier">ИДЕНТИФИКАТОР:</label>
-                            <input type="text" id="loginIdentifier" required 
-                                placeholder="OP-3826-XXX" 
-                                pattern="OP-3826-[0-9]{3}">
-                            <div class="input-hint">ФОРМАТ: OP-3826-XXX</div>
+                    <div class="card-atomic-body">
+                        <form class="access-form atomic-form" id="loginForm">
+                            <div class="input-group atomic-input-group">
+                                <label for="loginIdentifier">ИДЕНТИФИКАТОР:</label>
+                                <input type="text" id="loginIdentifier" required 
+                                    placeholder="OP-3826-XXX" 
+                                    pattern="OP-3826-[0-9]{3}"
+                                    class="atomic-input">
+                                <div class="input-hint atomic-hint">ФОРМАТ: OP-3826-XXX</div>
+                            </div>
+                            <div class="input-group atomic-input-group">
+                                <label for="loginPassword">КОД ДОСТУПА:</label>
+                                <div class="atomic-input-wrapper">
+                                    <input type="password" id="loginPassword" required 
+                                        minlength="6"
+                                        placeholder="●●●●●●●●"
+                                        class="atomic-input">
+                                    <div class="password-toggle atomic-toggle" id="loginPasswordToggle">👁</div>
+                                </div>
+                            </div>
+                            <div class="security-notice atomic-notice">
+                                <span class="notice-icon">⚠</span>
+                                СИСТЕМА КОНТРОЛИРУЕТСЯ. ВСЕ ПОПЫТКИ ДОСТУПА РЕГИСТРИРУЮТСЯ.
+                            </div>
+                            <button type="submit" class="access-btn btn-atomic btn-atomic-primary btn-atomic-stamp">
+                                <span class="btn-icon">▶</span>
+                                УСТАНОВИТЬ СВЯЗЬ
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card-atomic-footer">
+                        <div class="form-switch atomic-switch">
+                            <span>ПЕРВИЧНЫЙ ДОСТУП?</span>
+                            <button type="button" id="showRegisterForm" class="atomic-link">АКТИВИРОВАТЬ УЧЕТНУЮ ЗАПИСЬ</button>
                         </div>
-                        <div class="input-group">
-                            <label for="loginPassword">КОД ДОСТУПА:</label>
-                            <input type="password" id="loginPassword" required 
-                                minlength="6"
-                                placeholder="●●●●●●●●">
-                            <div class="password-toggle" id="loginPasswordToggle">👁</div>
-                        </div>
-                        <div class="security-notice">
-                            <span class="notice-icon">⚠</span>
-                            СИСТЕМА КОНТРОЛИРУЕТСЯ. ВСЕ ПОПЫТКИ ДОСТУПА РЕГИСТРИРУЮТСЯ.
-                        </div>
-                        <button type="submit" class="access-btn">
-                            <span class="btn-icon">▶</span>
-                            УСТАНОВИТЬ СВЯЗЬ
-                        </button>
-                    </form>
-                    <div class="form-switch">
-                        <span>ПЕРВИЧНЫЙ ДОСТУП?</span>
-                        <button type="button" id="showRegisterForm">АКТИВИРОВАТЬ УЧЕТНУЮ ЗАПИСЬ</button>
                     </div>
                 </div>
+
                 <!-- Форма регистрации -->
-                <div class="form-container" id="registerFormContainer">
-                    <div class="form-header">
-                        <span class="form-title">АКТИВАЦИЯ УЧЕТНОЙ ЗАПИСИ</span>
-                        <span class="form-icon">🛡️</span>
+                <div class="form-container card-atomic" id="registerFormContainer">
+                    <div class="card-atomic-header">
+                        <div class="form-header atomic-form-header">
+                            <span class="form-title atomic-heading atomic-heading-h3">АКТИВАЦИЯ УЧЕТНОЙ ЗАПИСИ</span>
+                            <span class="form-icon">🛡️</span>
+                        </div>
                     </div>
-                    <form class="access-form" id="registerForm">
-                        <div class="input-row">
-                            <div class="input-group">
-                                <label for="regLastName">ФАМИЛИЯ:</label>
-                                <input type="text" id="regLastName" required 
-                                    placeholder="ПЕТРОВ">
-                            </div>
-                            <div class="input-group">
-                                <label for="regFirstName">ИМЯ:</label>
-                                <input type="text" id="regFirstName" required 
-                                    placeholder="ИВАН">
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label for="regMiddleName">ОТЧЕСТВО:</label>
-                            <input type="text" id="regMiddleName" required 
-                                placeholder="СЕРГЕЕВИЧ">
-                        </div>
-                        <div class="input-group">
-                            <label for="regRank">ЗВАНИЕ:</label>
-                            <select id="regRank" required>
-                                <option value="">ВЫБЕРИТЕ ЗВАНИЕ</option>
-                                <option value="ЛЕЙТЕНАНТ">ЛЕЙТЕНАНТ</option>
-                                <option value="СТАРШИЙ ЛЕЙТЕНАНТ">СТАРШИЙ ЛЕЙТЕНАНТ</option>
-                                <option value="КАПИТАН">КАПИТАН</option>
-                                <option value="МАЙОР">МАЙОР</option>
-                                <option value="ПОДПОЛКОВНИК">ПОДПОЛКОВНИК</option>
-                                <option value="ПОЛКОВНИК">ПОЛКОВНИК</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="regPosition">ДОЛЖНОСТЬ:</label>
-                            <select id="regPosition" required>
-                                <option value="">ВЫБЕРИТЕ ДОЛЖНОСТЬ</option>
-                                <option value="ОПЕРАТОР">ОПЕРАТОР</option>
-                                <option value="СТАРШИЙ ОПЕРАТОР">СТАРШИЙ ОПЕРАТОР</option>
-                                <option value="ДИСПЕТЧЕР">ДИСПЕТЧЕР</option>
-                                <option value="ИНЖЕНЕР">ИНЖЕНЕР</option>
-                                <option value="ЛАБОРАНТ">ЛАБОРАНТ</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="regPassword">КОД ДОСТУПА:</label>
-                            <input type="password" id="regPassword" required 
-                                minlength="6"
-                                placeholder="●●●●●●●●">
-                            <div class="password-toggle" id="regPasswordToggle">👁</div>
-                            <div class="password-strength">
-                                <div class="strength-bar">
-                                    <div class="strength-level" id="passwordStrength"></div>
+                    <div class="card-atomic-body">
+                        <form class="access-form atomic-form" id="registerForm">
+                            <div class="input-row atomic-row">
+                                <div class="input-group atomic-input-group">
+                                    <label for="regLastName">ФАМИЛИЯ:</label>
+                                    <input type="text" id="regLastName" required 
+                                        placeholder="ПЕТРОВ"
+                                        class="atomic-input">
                                 </div>
-                                <span class="strength-text" id="strengthText">НАДЕЖНОСТЬ КОДА</span>
+                                <div class="input-group atomic-input-group">
+                                    <label for="regFirstName">ИМЯ:</label>
+                                    <input type="text" id="regFirstName" required 
+                                        placeholder="ИВАН"
+                                        class="atomic-input">
+                                </div>
                             </div>
+                            <div class="input-group atomic-input-group">
+                                <label for="regMiddleName">ОТЧЕСТВО:</label>
+                                <input type="text" id="regMiddleName" required 
+                                    placeholder="СЕРГЕЕВИЧ"
+                                    class="atomic-input">
+                            </div>
+                            <div class="input-group atomic-input-group">
+                                <label for="regRank">ЗВАНИЕ:</label>
+                                <select id="regRank" required class="atomic-input">
+                                    <option value="">ВЫБЕРИТЕ ЗВАНИЕ</option>
+                                    <option value="ЛЕЙТЕНАНТ">ЛЕЙТЕНАНТ</option>
+                                    <option value="СТАРШИЙ ЛЕЙТЕНАНТ">СТАРШИЙ ЛЕЙТЕНАНТ</option>
+                                    <option value="КАПИТАН">КАПИТАН</option>
+                                    <option value="МАЙОР">МАЙОР</option>
+                                    <option value="ПОДПОЛКОВНИК">ПОДПОЛКОВНИК</option>
+                                    <option value="ПОЛКОВНИК">ПОЛКОВНИК</option>
+                                </select>
+                            </div>
+                            <div class="input-group atomic-input-group">
+                                <label for="regPosition">ДОЛЖНОСТЬ:</label>
+                                <select id="regPosition" required class="atomic-input">
+                                    <option value="">ВЫБЕРИТЕ ДОЛЖНОСТЬ</option>
+                                    <option value="ОПЕРАТОР">ОПЕРАТОР</option>
+                                    <option value="СТАРШИЙ ОПЕРАТОР">СТАРШИЙ ОПЕРАТОР</option>
+                                    <option value="ДИСПЕТЧЕР">ДИСПЕТЧЕР</option>
+                                    <option value="ИНЖЕНЕР">ИНЖЕНЕР</option>
+                                    <option value="ЛАБОРАНТ">ЛАБОРАНТ</option>
+                                </select>
+                            </div>
+                            <div class="input-group atomic-input-group">
+                                <label for="regPassword">КОД ДОСТУПА:</label>
+                                <div class="atomic-input-wrapper">
+                                    <input type="password" id="regPassword" required 
+                                        minlength="6"
+                                        placeholder="●●●●●●●●"
+                                        class="atomic-input">
+                                    <div class="password-toggle atomic-toggle" id="regPasswordToggle">👁</div>
+                                </div>
+                                <div class="password-strength atomic-strength">
+                                    <div class="strength-bar atomic-bar">
+                                        <div class="strength-level atomic-level" id="passwordStrength"></div>
+                                    </div>
+                                    <span class="strength-text atomic-text" id="strengthText">НАДЕЖНОСТЬ КОДА</span>
+                                </div>
+                            </div>
+                            <div class="input-group atomic-input-group">
+                                <label for="regConfirmPassword">ПОДТВЕРЖДЕНИЕ КОДА:</label>
+                                <div class="atomic-input-wrapper">
+                                    <input type="password" id="regConfirmPassword" required 
+                                        placeholder="●●●●●●●●"
+                                        class="atomic-input">
+                                    <div class="password-toggle atomic-toggle" id="regConfirmPasswordToggle">👁</div>
+                                </div>
+                            </div>
+                            <div class="security-check atomic-check">
+                                <input type="checkbox" id="securityAgreement" required class="atomic-checkbox">
+                                <label for="securityAgreement" class="atomic-label">
+                                    ПОДТВЕРЖДАЮ ОЗНАКОМЛЕНИЕ С РЕЖИМОМ СЕКРЕТНОСТИ И ПРАВИЛАМИ ОБЪЕКТА 3826
+                                </label>
+                            </div>
+                            <button type="submit" class="access-btn btn-atomic btn-atomic-primary btn-atomic-stamp">
+                                <span class="btn-icon">⚡</span>
+                                АКТИВИРОВАТЬ УЧЕТНУЮ ЗАПИСЬ
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card-atomic-footer">
+                        <div class="form-switch atomic-switch">
+                            <span>УЖЕ АКТИВИРОВАНЫ?</span>
+                            <button type="button" id="showLoginForm" class="atomic-link">ВОЙТИ В СИСТЕМУ</button>
                         </div>
-                        <div class="input-group">
-                            <label for="regConfirmPassword">ПОДТВЕРЖДЕНИЕ КОДА:</label>
-                            <input type="password" id="regConfirmPassword" required 
-                                placeholder="●●●●●●●●">
-                            <div class="password-toggle" id="regConfirmPasswordToggle">👁</div>
-                        </div>
-                        <div class="security-check">
-                            <input type="checkbox" id="securityAgreement" required>
-                            <label for="securityAgreement">
-                                ПОДТВЕРЖДАЮ ОЗНАКОМЛЕНИЕ С РЕЖИМОМ СЕКРЕТНОСТИ И ПРАВИЛАМИ ОБЪЕКТА 3826
-                            </label>
-                        </div>
-                        <button type="submit" class="access-btn">
-                            <span class="btn-icon">⚡</span>
-                            АКТИВИРОВАТЬ УЧЕТНУЮ ЗАПИСЬ
-                        </button>
-                    </form>
-                    <div class="form-switch">
-                        <span>УЖЕ АКТИВИРОВАНЫ?</span>
-                        <button type="button" id="showLoginForm">ВОЙТИ В СИСТЕМУ</button>
                     </div>
                 </div>
             </div>
+
             <!-- Системные сообщения -->
-            <div class="system-messages" id="systemMessages">
+            <div class="system-messages atomic-messages" id="systemMessages">
                 <!-- Сообщения будут добавляться здесь -->
             </div>
+
             <!-- Футер -->
-            <footer class="login-footer">
-                <div class="footer-content">
-                    <p>СЕКРЕТНЫЙ ОБЪЕКТ Collective 3826 ■ СИСТЕМА КОНТРОЛЯ ДОСТУПА</p>
-                    <div class="security-level">
+            <footer class="login-footer atomic-footer">
+                <div class="footer-content atomic-footer-content">
+                    <p class="atomic-text-lead">СЕКРЕТНЫЙ ОБЪЕКТ Collective 3826 ■ СИСТЕМА КОНТРОЛЯ ДОСТУПА</p>
+                    <div class="security-level atomic-level-indicator">
                         УРОВЕНЬ СЕКРЕТНОСТИ:
-                        <span class="level-maximum">МАКСИМАЛЬНЫЙ</span>
+                        <span class="level-maximum stamp-atomic">МАКСИМАЛЬНЫЙ</span>
                     </div>
                 </div>
             </footer>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
@@ -8,433 +7,202 @@
         <link rel="stylesheet" href="css/MAIN.css">
         <link rel="stylesheet" href="css/PERSONALbusiness.css">
     </head>
-
     <body>
-        <div class="scanlines"></div>
-        <div class="noise"></div>
-        <div class="scanlines"></div>
+        <!-- Фоновые текстуры -->
         <div class="paper-texture"></div>
         <div class="paper-creased"></div>
-
+        <div class="scanlines"></div>
+        <div class="noise"></div>
+        <!-- Основной контент -->
         <header>
             <div class="header-glitch">
-                <h1>
-                    ЛИЧНОЕ ДЕЛО - Collective 3826
-                </h1>
-
-                <div class="glitch-text">
-                    ЛИЧНОЕ ДЕЛО - Collective 3826
-                </div>
+                <h1>ЛИЧНОЕ ДЕЛО - Collective 3826</h1>
             </div>
-
             <div class="terminal-status">
-                <span class="status-indicator">
-                    ■ СИСТЕМА АКТИВНА
-                </span>
-
-                <span class="date-display" id="currentDate">
-
-                </span>
+                <span class="status-indicator">■ СИСТЕМА АКТИВНА</span>
+                <span class="date-display" id="currentDate"></span>
             </div>
         </header>
-
         <aside>
             <nav class="menu">
                 <div class="menu-header">
-                    <div class="circuit-line">
-
-                    </div>
-
-                    <span>
-                        СИСТЕМНОЕ МЕНЮ
-                    </span>
-
-                    <div class="circuit-line">
-
-                    </div>
+                    <div class="circuit-line"></div>
+                    <span>СИСТЕМНОЕ МЕНЮ</span>
+                    <div class="circuit-line"></div>
                 </div>
                 <ul>
                     <li>
-                            <a href="PERSONALbusiness.html">
-                                <span class="menu-icon">
-                                    ⟡
-                                </span>
-
-                                <!-- Личный кабинет -->
-                                ЛИЧНОЕ ДЕЛО
-                            </a>
-                        </li>
-        
-                        <li>
-                            <a href="COMMUNICATIONlog.html">
-                                <span class="menu-icon">
-                                    ⚡
-                                </span>
-
-                                <!-- Истории сообщений -->
-                                ЖУРНАЛ СВЯЗИ
-                            </a>
-                        </li>
-        
-                        <li>
-                            <a href="COMMUNICATIONsession.html">
-                                <span class="menu-icon">
-                                    ⚠
-                                </span>
-
-                                <!-- Месседжер -->
-                                СЕАНС СВЯЗИ
-                            </a>
-                        </li>
-        
-                        <li>
-                            <a href="OBJECTdocumentation.html">
-                                <span class="menu-icon">
-                                    📁
-                                </span>
-
-                                <!-- Фото, виде, аудио, загруженные пользователем -->
-                                ДОКУМЕНТАЦИЯ ОБЪЕКТА
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="system_utilities.html">
-                                <span class="menu-icon">
-                                    🔧
-                                </span>
-
-                                СИСТЕМНЫЕ УТИЛИТЫ
-                            </a>
-                        </li>
+                        <a href="PERSONALbusiness.html">
+                            ЛИЧНОЕ ДЕЛО
+                        </a>
+                    </li>
+                    <li>
+                        <a href="COMMUNICATIONlog.html">
+                            ЖУРНАЛ СВЯЗИ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="COMMUNICATIONsession.html">
+                            СЕАНС СВЯЗИ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="OBJECTdocumentation.html">
+                            ДОКУМЕНТАЦИЯ ОБЪЕКТА
+                        </a>
+                    </li>
+                    <li>
+                        <a href="system_utilities.html">
+                            СИСТЕМНЫЕ УТИЛИТЫ
+                        </a>
+                    </li>
                 </ul>
             </nav>
-            
             <div class="system-panel">
-                <div class="panel-header">
-                    СИСТЕМНЫЙ СТАТУС
-                </div>
-
+                <div class="panel-header">СИСТЕМНЫЙ СТАТУС</div>
                 <div class="status-item">
-                    <span>
-                        СВЯЗЬ:
-                    </span>
-
-                    <span class="status-online">
-                        ■ ОНЛАЙН
-                    </span>
+                    <span>СВЯЗЬ:</span>
+                    <span class="status-online">■ ОНЛАЙН</span>
                 </div>
-
                 <div class="status-item">
-                    <span>
-                        БЕЗОПАСНОСТЬ:
-                    </span>
-
-                    <span class="status-secure">
-                        ■ СОВЕРШЕННАЯ
-                    </span>
+                    <span>БЕЗОПАСНОСТЬ:</span>
+                    <span class="status-secure">■ СОВЕРШЕННАЯ</span>
                 </div>
-
                 <div class="status-item">
-                    <span>
-                        ОПЕРАТОР:
-                    </span>
-
-                    <span class="status-online" id="operatorStatus">
-                        ■ АКТИВЕН
-                    </span>
+                    <span>ОПЕРАТОР:</span>
+                    <span class="status-online" id="operatorStatus">■ АКТИВЕН</span>
                 </div>
             </div>
         </aside>
-
         <main>
             <div class="personal-file-header">
                 <div class="file-title">
-                    <span class="main-title">
-                        ЛИЧНОЕ ДЕЛО №3826-OP <!-- Реализовать, что даётся при регистрации -->
-                    </span>
-
-                    <span class="subtitle">
-                        СЕКРЕТНЫЙ ДОКУМЕНТ
-                    </span>
+                    <span class="main-title">ЛИЧНОЕ ДЕЛО №3826-OP</span> <!-- Реализовать, что даётся при регистрации -->
+                    <span class="subtitle">СЕКРЕТНЫЙ ДОКУМЕНТ</span>
                 </div>
-
                 <div class="clearance-level">
                     <div class="clearance-badge">
-                        <span class="clearance-text">
-                            ДОПУСК
-                        </span>
-
-                        <span class="clearance-type">
-                            ОВ <!-- Реализовать, что даётся владельцем сайта и изночально при регистрации -->
-                        </span>
+                        <span class="clearance-text">ДОПУСК</span>
+                        <span class="clearance-type">ОВ</span><!-- Реализовать, что даётся владельцем сайта и изночально при регистрации -->
                     </div>
-
-                    <span class="clearance-info">
-                        ОСОБОЙ ВАЖНОСТИ
-                    </span>
+                    <span class="clearance-info">ОСОБОЙ ВАЖНОСТИ</span>
                 </div>
             </div>
-
             <div class="personal-content">
                 <!-- Левая колонка - Основная информация -->
                 <div class="info-column">
                     <div class="info-card personal-info">
                         <div class="card-header">
-                            <span class="card-title">
-                                ПЕРСОНАЛЬНЫЕ ДАННЫЕ
-                            </span>
-
-                            <span class="card-icon">
-                                👤
-                            </span>
+                            <span class="card-title">ПЕРСОНАЛЬНЫЕ ДАННЫЕ</span>
                         </div>
-                        
                         <div class="info-grid">
                             <div class="info-item">
-                                <span class="info-label">
-                                    ФАМИЛИЯ:
-                                </span>
-
-                                <span class="info-value" id="lastName">
-                                    ПЕТРОВ <!-- Реализовать через регистрацию -->
-                                </span>
+                                <span class="info-label">ФАМИЛИЯ:</span>
+                                <span class="info-value" id="lastName">ПЕТРОВ</span><!-- Реализовать через регистрацию -->
                             </div>
-
                             <div class="info-item">
-                                <span class="info-label">
-                                    ИМЯ:
-                                </span>
-
-                                <span class="info-value" id="firstName">
-                                    ИВАН <!-- Реализовать через регистрацию -->
-                                </span>
+                                <span class="info-label">ИМЯ:</span>
+                                <span class="info-value" id="firstName">ИВАН</span><!-- Реализовать через регистрацию -->
                             </div>
-
                             <div class="info-item">
-                                <span class="info-label">
-                                    ОТЧЕСТВО:
-                                </span>
-
-                                <span class="info-value" id="middleName">
-                                    СЕРГЕЕВИЧ  <!-- Реализовать через регистрацию -->
-                                </span>
+                                <span class="info-label">ОТЧЕСТВО:</span>
+                                <span class="info-value" id="middleName">СЕРГЕЕВИЧ</span><!-- Реализовать через регистрацию -->
                             </div>
-
                             <div class="info-item">
-                                <span class="info-label">
-                                    ЗВАНИЕ:
-                                </span>
-
-                                <span class="info-value" id="rank">
-                                    МАЙОР  <!-- Реализовать через регистрацию -->
-                                </span>
+                                <span class="info-label">ЗВАНИЕ:</span>
+                                <span class="info-value" id="rank">МАЙОР</span><!-- Реализовать через регистрацию -->
                             </div>
-
                             <div class="info-item">
-                                <span class="info-label">
-                                    ДОЛЖНОСТЬ:
-                                </span>
-
-                                <span class="info-value" id="position">
-                                    СТАРШИЙ ОПЕРАТОР  <!-- Реализовать через регистрацию -->
-                                </span>
+                                <span class="info-label">ДОЛЖНОСТЬ:</span>
+                                <span class="info-value" id="position">СТАРШИЙ ОПЕРАТОР</span><!-- Реализовать через регистрацию -->
                             </div>
-
                             <div class="info-item">
-                                <span class="info-label">
-                                    ПОДРАЗДЕЛЕНИЕ:
-                                </span>
-
-                                <span class="info-value" id="department">
-                                    ОТДЕЛ КОММУНИКАЦИЙ  <!-- Реализовать через регистрацию -->
-                                </span>
+                                <span class="info-label">ПОДРАЗДЕЛЕНИЕ:</span>
+                                <span class="info-value" id="department">ОТДЕЛ КОММУНИКАЦИЙ</span><!-- Реализовать через регистрацию -->
                             </div>
                         </div>
                     </div>
-
                     <div class="info-card system-info">
                         <div class="card-header">
-                            <span class="card-title">
-                                СИСТЕМНЫЕ ДАННЫЕ
-                            </span>
-
-                            <span class="card-icon">
-                                ⚙️
-                            </span>
+                            <span class="card-title">СИСТЕМНЫЕ ДАННЫЕ</span>
                         </div>
-                        
                         <div class="info-grid">
                             <div class="info-item">
-                                <span class="info-label">
-                                    ИДЕНТИФИКАТОР:
-                                </span>
-
-                                <span class="info-value" id="operatorId">
-                                    OP-3826-001
-                                </span>
+                                <span class="info-label">ИДЕНТИФИКАТОР:</span>
+                                <span class="info-value" id="operatorId">OP-3826-001</span>
                             </div>
-
                             <div class="info-item">
-                                <span class="info-label">
-                                    ДАТА РЕГИСТРАЦИИ:
-                                </span>
-
-                                <span class="info-value" id="regDate">
-                                    15.08.1985
-                                </span>
+                                <span class="info-label">ДАТА РЕГИСТРАЦИИ:</span>
+                                <span class="info-value" id="regDate">15.08.1985</span>
                             </div>
-
                             <div class="info-item">
-                                <span class="info-label">
-                                    СТАТУС:
-                                </span>
-
-                                <span class="info-value status-active">
-                                    ■ АКТИВЕН
-                                </span>
+                                <span class="info-label">СТАТУС:</span>
+                                <span class="info-value status-active">■ АКТИВЕН</span>
                             </div>
-
                             <div class="info-item">
-                                <span class="info-label">
-                                    ПОСЛЕДНЯЯ АКТИВНОСТЬ:
-                                </span>
-
-                                <span class="info-value" id="lastActivity">
-                                    СЕЙЧАС
-                                </span>
+                                <span class="info-label">ПОСЛЕДНЯЯ АКТИВНОСТЬ:</span>
+                                <span class="info-value" id="lastActivity">СЕЙЧАС</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Правая колонка - Статистика и действия -->
                 <div class="stats-column">
                     <div class="stats-card">
                         <div class="card-header">
-                            <span class="card-title">
-                                СТАТИСТИКА АКТИВНОСТИ
-                            </span>
-
-                            <span class="card-icon">
-                                📊
-                            </span>
+                            <span class="card-title">СТАТИСТИКА АКТИВНОСТИ</span>
                         </div>
-                        
                         <div class="stats-grid">
                             <div class="stat-item">
-                                <span class="stat-label">
-                                    ОТПРАВЛЕНО СООБЩЕНИЙ:
-                                </span>
-
-                                <span class="stat-value" id="messagesSent">
-                                    0
-                                </span>
+                                <span class="stat-label">ОТПРАВЛЕНО СООБЩЕНИЙ:</span>
+                                <span class="stat-value" id="messagesSent">0</span>
                             </div>
-
                             <div class="stat-item">
-                                <span class="stat-label">
-                                    ЗАГРУЖЕНО ФАЙЛОВ:
-                                </span>
-
-                                <span class="stat-value" id="filesUploaded">
-                                    0
-                                </span>
+                                <span class="stat-label">ЗАГРУЖЕНО ФАЙЛОВ:</span>
+                                <span class="stat-value" id="filesUploaded">0</span>
                             </div>
-
                             <div class="stat-item">
-                                <span class="stat-label">
-                                    СЕАНСОВ СВЯЗИ:
-                                </span>
-
-                                <span class="stat-value" id="sessionsCount">
-                                    1
-                                </span>
+                                <span class="stat-label">СЕАНСОВ СВЯЗИ:</span>
+                                <span class="stat-value" id="sessionsCount">1</span>
                             </div>
-
                             <div class="stat-item">
-                                <span class="stat-label">
-                                    ВРЕМЯ РАБОТЫ:
-                                </span>
-
-                                <span class="stat-value" id="workTime">
-                                    0ч 0м
-                                </span>
+                                <span class="stat-label">ВРЕМЯ РАБОТЫ:</span>
+                                <span class="stat-value" id="workTime">0ч 0м</span>
                             </div>
                         </div>
-
                         <div class="activity-chart">
-                            <div class="chart-header">
-                                АКТИВНОСТЬ ПО ДНЯМ
-                            </div>
-
-                            <div class="chart-bars" id="activityChart">
-                                <!-- Будет заполнено JavaScript -->
-                            </div>
+                            <div class="chart-header">АКТИВНОСТЬ ПО ДНЯМ</div>
+                            <div class="chart-bars" id="activityChart"><!-- Будет заполнено JavaScript --></div>
                         </div>
                     </div>
-
                     <div class="actions-card">
                         <div class="card-header">
-                            <span class="card-title">
-                                СИСТЕМНЫЕ ДЕЙСТВИЯ
-                            </span>
-
-                            <span class="card-icon">
-                                🔧
-                            </span>
+                            <span class="card-title">СИСТЕМНЫЕ ДЕЙСТВИЯ</span>
                         </div>
-                        
                         <div class="actions-grid">
                             <button class="action-btn" id="changePasswordBtn">
-                                <span class="btn-icon">
-                                    🔐
-                                </span>
-
                                 СМЕНИТЬ КОД ДОСТУПА
                             </button>
-
                             <button class="action-btn" id="exportDataBtn">
-                                <span class="btn-icon">
-                                    📤
-                                </span>
-
                                 ЭКСПОРТ ДАННЫХ
                             </button>
-
                             <button class="action-btn" id="clearHistoryBtn">
-                                <span class="btn-icon">
-                                    🗑️
-                                </span>
-
                                 ОЧИСТИТЬ ИСТОРИЮ
                             </button>
-
                             <button class="action-btn warning" id="emergencyBtn">
-                                <span class="btn-icon">
-                                    🚨
-                                </span>
-
                                 АВАРИЙНЫЙ ПРОТОКОЛ
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- Модальное окно смены пароля -->
             <div id="passwordModal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <span class="modal-title">
-                            СМЕНА КОДА ДОСТУПА
-                        </span>
-
-                        <span class="close-modal" id="closePasswordModal">
-                            &times;
-                        </span>
+                        <span class="modal-title">СМЕНА КОДА ДОСТУПА</span>
+                        <span class="close-modal" id="closePasswordModal">&times;</span>
                     </div>
-
                     <div class="modal-body">
                         <form class="password-form" id="passwordForm">
                             <div class="form-group">
@@ -445,7 +213,6 @@
                                 <label for="newPassword">НОВЫЙ КОД:</label>
                                 <input type="password" id="newPassword" required minlength="6">
                             </div>
-
                             <div class="form-group">
                                 <label for="confirmPassword">ПОДТВЕРЖДЕНИЕ:</label>
                                 <input type="password" id="confirmPassword" required>
@@ -463,14 +230,12 @@
                 </div>
             </div>
         </main>
-
         <footer>
             <div class="footer-content">
                 <p>СЕКРЕТНЫЙ ОБЪЕКТ Collective 3826 ■ СИСТЕМА КОНТРОЛЯ И СВЯЗИ</p>
                 <div class="security-level">УРОВЕНЬ СЕКРЕТНОСТИ:<span class="level-maximum">МАКСИМАЛЬНЫЙ</span></div>
             </div>
         </footer>
-
         <script src="js/PERSONALbusiness.js"></script>
     </body>
 </html>

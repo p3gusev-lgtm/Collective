@@ -6,6 +6,7 @@
 }
 
 :root {
+    /* Существующие цвета */
     --color-paper-yellow: #f5e8c8;
     --color-paper-dark-yellow: #e6d4a8;
     --color-paper-aged: #d4c4a0;
@@ -18,6 +19,22 @@
     --color-gold: #b8860b;
     --color-white: #ffffff;
     --color-shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Atomic Heart цвета */
+    --color-paper-beige: #f0e8d8;
+    --color-paper-aged-atomic: #e8dfc8;
+    --color-paper-dark: #d6ccb5;
+    --color-stamp-red: #8b0000;
+    --color-stamp-dark-red: #a52a2a;
+    --color-metal-gray: #2f4f4f;
+    --color-metal-dark: #36454f;
+    --color-ink-brown: #321414;
+    --color-ink-dark: #222222;
+    --color-lamp-orange: #d49450;
+    --color-lamp-green: #556b2f;
+    --color-highlight: #e8d5b5;
+    --color-border-light: #c4b8a0;
+    --color-overlay: rgba(139, 0, 0, 0.05);
 }
 
 @font-face {
@@ -30,16 +47,542 @@
     src: local('Courier New'), local('Consolas'), monospace;
 }
 
+@font-face {
+    font-family: 'ArchiveMono';
+    src: local('Courier New'), local('Consolas'), monospace;
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SovietHeading';
+    src: local('Arial Narrow'), local('Oswald'), sans-serif;
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* ===== ОСНОВНАЯ СТРУКТУРА LAYOUT ===== */
 body {
-    font-family: 'SovietType', serif;
-    color: var(--color-ink-black);
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "aside main"
+        "footer footer";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 250px 1fr;
+    min-height: 100vh;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* Atomic Heart текстуры фона */
+.body-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        var(--color-paper-beige),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 19px,
+            rgba(139, 0, 0, 0.03) 19px,
+            rgba(139, 0, 0, 0.03) 20px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 19px,
+            rgba(139, 0, 0, 0.03) 19px,
+            rgba(139, 0, 0, 0.03) 20px
+        ),
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(139, 115, 85, 0.1) 0%,
+            transparent 15%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(139, 115, 85, 0.08) 0%,
+            transparent 20%
+        ),
+        radial-gradient(
+            circle at 40% 80%,
+            rgba(139, 115, 85, 0.06) 0%,
+            transparent 12%
+        );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Atomic Heart эффекты уголков */
+.corner-folds::before,
+.corner-folds::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, transparent 50%, var(--color-paper-dark) 50%);
+    z-index: 2;
+}
+
+.corner-folds::before {
+    top: 0;
+    left: 0;
+}
+
+.corner-folds::after {
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+}
+
+/* Atomic Heart типографика */
+.atomic-heading {
+    font-family: 'SovietHeading', sans-serif;
+    font-weight: bold;
+    color: var(--color-stamp-red);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.8rem;
     position: relative;
+}
+
+.atomic-heading-h1 {
+    font-size: 2.2rem;
+    text-shadow: 1px 1px 2px var(--color-shadow);
+}
+
+.atomic-heading-h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px dotted var(--color-stamp-red);
+    padding-bottom: 0.3rem;
+}
+
+.atomic-heading-h3 {
+    font-size: 1.4rem;
+}
+
+.atomic-text-lead {
+    font-size: 1.1rem;
+    color: var(--color-ink-dark);
+    border-left: 3px solid var(--color-lamp-orange);
+    padding-left: 1rem;
+    margin-left: 0.5rem;
+}
+
+/* Atomic Heart ссылки */
+.atomic-link {
+    color: var(--color-stamp-red);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--color-stamp-red);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.atomic-link:hover {
+    color: var(--color-stamp-dark-red);
+    border-bottom-style: solid;
+    background-color: var(--color-overlay);
+}
+
+.atomic-link::after {
+    content: ' ›';
+    font-weight: bold;
+}
+
+/* Atomic Heart кнопки */
+.btn-atomic {
+    font-family: 'ArchiveMono', monospace;
+    background: linear-gradient(
+        to bottom,
+        var(--color-paper-aged) 0%,
+        var(--color-paper-dark) 100%
+    );
+    border: 1px solid var(--color-metal-gray);
+    color: var(--color-ink-brown);
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 
+        1px 1px 0 var(--color-shadow),
+        inset 1px 1px 0 var(--color-highlight);
+}
+
+.btn-atomic:hover {
+    background: linear-gradient(
+        to bottom,
+        var(--color-paper-dark) 0%,
+        var(--color-paper-aged) 100%
+    );
+    transform: translate(1px, 1px);
+    box-shadow: 
+        0px 0px 0 var(--color-shadow),
+        inset 1px 1px 0 var(--color-highlight);
+}
+
+.btn-atomic-primary {
+    background: linear-gradient(
+        to bottom,
+        var(--color-stamp-red) 0%,
+        var(--color-stamp-dark-red) 100%
+    );
+    color: var(--color-paper-beige);
+    border-color: var(--color-stamp-dark-red);
+}
+
+.btn-atomic-stamp {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-atomic-stamp::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.btn-atomic-stamp:hover::before {
+    left: 100%;
+}
+
+/* Atomic Heart карточки */
+.card-atomic {
+    background: var(--color-paper-beige);
+    border: 1px solid var(--color-border-light);
+    border-top: 3px solid var(--color-stamp-red);
+    position: relative;
+    margin-bottom: 1.5rem;
+    box-shadow: 
+        2px 2px 4px var(--color-shadow),
+        inset 0 0 20px rgba(139, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.card-atomic:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        3px 3px 6px var(--color-shadow),
+        inset 0 0 20px rgba(139, 0, 0, 0.03);
+}
+
+.card-atomic-header {
+    background: linear-gradient(
+        to bottom,
+        var(--color-metal-gray) 0%,
+        var(--color-metal-dark) 100%
+    );
+    color: var(--color-paper-beige);
+    padding: 0.8rem 1.5rem;
+    font-family: 'SovietHeading', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.card-atomic-body {
+    padding: 1.5rem;
+}
+
+.card-atomic-footer {
+    background: var(--color-paper-aged);
+    padding: 0.8rem 1.5rem;
+    border-top: 1px dashed var(--color-border-light);
+    font-size: 0.8rem;
+    color: var(--color-metal-gray);
+}
+
+/* Atomic Heart штампы */
+.stamp-atomic {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: var(--color-stamp-red);
+    color: var(--color-paper-beige);
+    font-family: 'ArchiveMono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--color-stamp-dark-red);
+    transform: rotate(-2deg);
+    box-shadow: 1px 1px 2px var(--color-shadow);
+}
+
+.stamp-atomic-approved {
+    background: var(--color-lamp-green);
+    border-color: #445526;
+}
+
+.stamp-atomic-pending {
+    background: var(--color-lamp-orange);
+    border-color: #b37d40;
+}
+
+.stamp-atomic-rejected {
+    background: var(--color-metal-gray);
+    border-color: var(--color-metal-dark);
+}
+
+/* Atomic Heart статусы */
+.status-atomic {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-atomic::before {
+    content: '■';
+    color: var(--color-lamp-green);
+}
+
+.status-atomic-offline::before {
+    color: var(--color-metal-gray);
+}
+
+.status-atomic-warning::before {
+    color: var(--color-lamp-orange);
+}
+
+.status-atomic-critical::before {
+    color: var(--color-stamp-red);
+    animation: blink 1s infinite;
+}
+
+/* ===== КОМПОНЕНТЫ HEADER, ASIDE, MAIN, FOOTER ===== */
+header {
+    grid-area: header;
+    position: relative;
+    z-index: 20;
+    background: var(--color-white);
+    border: 2px solid var(--color-folder-red);
+    border-radius: 3px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 3px 3px 6px var(--color-shadow);
+}
+
+.header-glitch {
+    position: relative;
+}
+
+.header-glitch h1 {
+    color: var(--color-folder-red);
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'SovietMono', monospace;
+}
+
+.terminal-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+}
+
+.status-indicator {
+    color: var(--color-folder-red);
+    font-weight: bold;
+    font-size: 0.8rem;
+    font-family: 'SovietMono', monospace;
+}
+.date-display {
+    color: var(--color-ink-gray);
+    font-size: 0.7rem;
+    font-family: 'SovietMono', monospace;
+}
+
+/* Боковая панель */
+aside {
+    grid-area: aside;
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu {
+    background: var(--color-white);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 2px;
+    padding: 1rem;
+    box-shadow: 2px 2px 4px var(--color-shadow);
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-line-brown);
+    font-family: 'SovietMono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--color-folder-red);
+}
+
+.circuit-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-line-brown);
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    color: var(--color-ink-black);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 1px;
+    font-family: 'SovietMono', monospace;
+    font-size: 0.8rem;
+}
+
+.menu a:hover {
     background: var(--color-paper-yellow);
-    line-height: 1.4;
-    overflow-x: hidden;
+    border-left: 2px solid var(--color-folder-red);
+}
+
+.system-panel {
+    background: var(--color-white);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 2px;
+    padding: 1rem;
+    box-shadow: 2px 2px 4px var(--color-shadow);
+}
+
+.panel-header {
+    font-family: 'SovietMono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--color-folder-red);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--color-line-brown);
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    font-family: 'SovietMono', monospace;
+}
+
+.status-online {
+    color: var(--color-folder-red);
+    font-weight: bold;
+}
+
+.status-secure {
+    color: var(--color-stamp-blue);
+    font-weight: bold;
+}
+
+main {
+    grid-area: main;
+    position: relative;
+    z-index: 20;
+    overflow-y: auto;
+}
+
+footer {
+    grid-area: footer;
+    position: relative;
+    z-index: 20;
+    background: var(--color-white);
+    border: 1px solid var(--color-line-brown);
+    border-radius: 2px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 2px 2px 4px var(--color-shadow);
+}
+
+.footer-content p {
+    color: var(--color-ink-gray);
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    font-family: 'SovietMono', monospace;
+}
+
+.security-level {
+    color: var(--color-ink-black);
+    font-size: 0.7rem;
+    font-family: 'SovietMono', monospace;
+}
+
+.level-maximum {
+    color: var(--color-folder-red);
+    font-weight: bold;
 }
 
 /* ===== ТЕКСТУРА БУМАГИ И ЭФФЕКТЫ СТАРИНЫ ===== */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.1) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.3;
+}
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.03) 1%, transparent 2%),
+        radial-gradient(circle at 80% 20%, rgba(0, 139, 139, 0.02) 1%, transparent 2%),
+        radial-gradient(circle at 40% 80%, rgba(139, 139, 0, 0.02) 1%, transparent 2%);
+    background-size: 300px 300px, 200px 200px, 250px 250px;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0.4;
+}
+
 .paper-texture {
     position: fixed;
     top: 0;
@@ -47,11 +590,8 @@ body {
     width: 100%;
     height: 100%;
     background: 
-        /* Основной цвет бумаги с градиентами выцветания */
         linear-gradient(45deg, var(--color-paper-yellow) 0%, var(--color-paper-dark-yellow) 100%),
-        /* Текстура бумаги */
         url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.03"><rect width="100%" height="100%" fill="%238b7355"/></svg>'),
-        /* Пятна и потёртости */
         radial-gradient(circle at 20% 30%, rgba(139, 115, 85, 0.1) 0%, transparent 20%),
         radial-gradient(circle at 80% 70%, rgba(139, 115, 85, 0.08) 0%, transparent 25%),
         radial-gradient(circle at 40% 80%, rgba(139, 115, 85, 0.06) 0%, transparent 15%);
@@ -300,8 +840,91 @@ body {
     }
 }
 
+/* Atomic Heart анимации */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes stampAppearAtomic {
+    0% {
+        transform: scale(3) rotate(-5deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(2deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(-2deg);
+        opacity: 1;
+    }
+}
+
+.typewriter-atomic {
+    overflow: hidden;
+    border-right: 2px solid var(--color-stamp-red);
+    white-space: nowrap;
+    animation: 
+        typewriter 3s steps(40, end),
+        blink 0.75s step-end infinite;
+}
+
+/* Atomic Heart декоративные элементы */
+.cross-mark {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: 
+        linear-gradient(45deg, transparent 45%, var(--color-metal-gray) 45%, var(--color-metal-gray) 55%, transparent 55%),
+        linear-gradient(-45deg, transparent 45%, var(--color-metal-gray) 45%, var(--color-metal-gray) 55%, transparent 55%);
+    opacity: 0.1;
+}
+
+.cross-mark-tl { top: 10px; left: 10px; }
+.cross-mark-tr { top: 10px; right: 10px; }
+.cross-mark-bl { bottom: 10px; left: 10px; }
+.cross-mark-br { bottom: 10px; right: 10px; }
+
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
+    body {
+        grid-template-areas: 
+            "header"
+            "aside"
+            "main"
+            "footer";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    .terminal-status {
+        align-items: center;
+    }
+
+    .menu-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.3rem;
+    }
+
+    .circuit-line {
+        width: 100%;
+    }
+
     .input-row {
         grid-template-columns: 1fr;
         gap: 0.5rem;

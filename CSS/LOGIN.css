@@ -21,6 +21,12 @@ body {
     min-height: auto; /* Убираем фиксированную высоту */
 }
 
+.login-container-atomic {
+    background: var(--color-paper-beige);
+    border: 2px solid var(--color-metal-gray);
+    border-top: 4px solid var(--color-stamp-red);
+}
+
 /* Заголовок как обложка папки */
 .system-header {
     text-align: center;
@@ -37,6 +43,15 @@ body {
     font-family: 'SovietMono', monospace;
 }
 
+.system-header-atomic {
+    background: linear-gradient(
+        to bottom,
+        var(--color-metal-gray) 0%,
+        var(--color-metal-dark) 100%
+    );
+    border: 2px solid var(--color-stamp-dark-red);
+}
+
 .system-header::before {
     content: '';
     position: absolute;
@@ -47,6 +62,13 @@ body {
     background: linear-gradient(90deg, 
         transparent, 
         var(--color-gold), 
+        transparent);
+}
+
+.system-header-atomic::before {
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--color-lamp-orange), 
         transparent);
 }
 
@@ -133,6 +155,15 @@ body {
     margin-bottom: 1rem; /* Отступ между формами если они будут видны одновременно */
 }
 
+.form-container-atomic {
+    background: var(--color-paper-beige);
+    border: 1px solid var(--color-border-light);
+    border-top: 3px solid var(--color-stamp-red);
+    box-shadow: 
+        2px 2px 4px var(--color-shadow),
+        inset 0 0 20px rgba(139, 0, 0, 0.02);
+}
+
 .form-container::before {
     content: '';
     position: absolute;
@@ -144,6 +175,13 @@ body {
         var(--color-folder-red), 
         var(--color-gold), 
         var(--color-folder-red));
+}
+
+.form-container-atomic::before {
+    background: linear-gradient(90deg, 
+        var(--color-stamp-red), 
+        var(--color-lamp-orange), 
+        var(--color-stamp-red));
 }
 
 .form-container::after {
@@ -284,6 +322,12 @@ body {
     color: var(--color-ink-black);
     position: relative;
     font-family: 'SovietMono', monospace;
+}
+
+.security-notice-atomic {
+    background: rgba(139, 0, 0, 0.05);
+    border: 2px solid var(--color-stamp-red);
+    border-left: 4px solid var(--color-stamp-red);
 }
 
 .security-notice::before {
