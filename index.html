@@ -57,7 +57,7 @@
                                         minlength="6"
                                         placeholder="●●●●●●●●"
                                         class="atomic-input">
-                                    <div class="password-toggle atomic-toggle" id="loginPasswordToggle">👁</div>
+                                    <button type="button" class="password-toggle" id="loginPasswordToggle">ПОКАЗАТЬ</button>
                                 </div>
                             </div>
                             <div class="security-notice atomic-notice">
@@ -72,8 +72,8 @@
                     </div>
                     <div class="card-atomic-footer">
                         <div class="form-switch atomic-switch">
-                            <span>ПЕРВИЧНЫЙ ДОСТУП?</span>
-                            <button type="button" id="showRegisterForm" class="atomic-link">АКТИВИРОВАТЬ УЧЕТНУЮ ЗАПИСЬ</button>
+                            <span class="atomic-switch-text">ПЕРВИЧНЫЙ ДОСТУП?</span>
+                            <button type="button" id="showRegisterForm" class="form-switch-btn">АКТИВИРОВАТЬ УЧЕТНУЮ ЗАПИСЬ</button>
                         </div>
                     </div>
                 </div>
@@ -134,11 +134,11 @@
                             <div class="input-group atomic-input-group">
                                 <label for="regPassword">КОД ДОСТУПА:</label>
                                 <div class="atomic-input-wrapper">
-                                    <input type="password" id="regPassword" required 
+                                    <input type="password" id="loginPassword" required 
                                         minlength="6"
                                         placeholder="●●●●●●●●"
                                         class="atomic-input">
-                                    <div class="password-toggle atomic-toggle" id="regPasswordToggle">👁</div>
+                                    <button type="button" class="password-toggle" id="loginPasswordToggle">ПОКАЗАТЬ</button>
                                 </div>
                                 <div class="password-strength atomic-strength">
                                     <div class="strength-bar atomic-bar">
@@ -150,10 +150,11 @@
                             <div class="input-group atomic-input-group">
                                 <label for="regConfirmPassword">ПОДТВЕРЖДЕНИЕ КОДА:</label>
                                 <div class="atomic-input-wrapper">
-                                    <input type="password" id="regConfirmPassword" required 
+                                    <input type="password" id="loginPassword" required 
+                                        minlength="6"
                                         placeholder="●●●●●●●●"
                                         class="atomic-input">
-                                    <div class="password-toggle atomic-toggle" id="regConfirmPasswordToggle">👁</div>
+                                    <button type="button" class="password-toggle" id="loginPasswordToggle">ПОКАЗАТЬ</button>
                                 </div>
                             </div>
                             <div class="security-check atomic-check">
@@ -170,8 +171,8 @@
                     </div>
                     <div class="card-atomic-footer">
                         <div class="form-switch atomic-switch">
-                            <span>УЖЕ АКТИВИРОВАНЫ?</span>
-                            <button type="button" id="showLoginForm" class="atomic-link">ВОЙТИ В СИСТЕМУ</button>
+                            <span class="atomic-switch-text">УЖЕ АКТИВИРОВАНЫ?</span>
+                            <button type="button" id="showLoginForm" class="form-switch-btn">ВОЙТИ В СИСТЕМУ</button>
                         </div>
                     </div>
                 </div>

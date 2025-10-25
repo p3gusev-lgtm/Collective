@@ -1,58 +1,45 @@
-/* ===== СТРАНИЦА ВХОДА - ПАПКА ЛИЧНОГО ДЕЛА ===== */
-body {
+/* ===== СТРАНИЦА ВХОДА - ATOMIC HEART СТИЛЬ ===== */
+.atomic-body {
     min-height: 100vh;
-    background: linear-gradient(135deg, 
-        var(--color-paper-yellow) 0%, 
-        var(--color-paper-dark-yellow) 50%,
-        var(--color-paper-yellow) 100%);
-    display: block; /* Меняем flex на block для нормальной прокрутки */
+    background: var(--color-paper-beige);
+    display: block;
     overflow-x: hidden;
     position: relative;
     padding: 20px;
+    font-family: 'ArchiveMono', monospace;
 }
 
-.login-container {
+.atomic-container {
     width: 100%;
     max-width: 600px;
     padding: 2rem;
     position: relative;
     z-index: 10;
-    margin: 0 auto; /* Центрируем контейнер вместо flex-центрирования */
-    min-height: auto; /* Убираем фиксированную высоту */
+    margin: 0 auto;
+    min-height: auto;
 }
 
-.login-container-atomic {
-    background: var(--color-paper-beige);
-    border: 2px solid var(--color-metal-gray);
-    border-top: 4px solid var(--color-stamp-red);
-}
-
-/* Заголовок как обложка папки */
-.system-header {
+/* Atomic Header */
+.atomic-header {
     text-align: center;
     margin-bottom: 2rem;
     padding: 2rem;
-    background: var(--color-folder-red);
-    border: 3px solid var(--color-folder-dark-red);
-    border-radius: 3px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 
-        4px 4px 8px var(--color-shadow),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    font-family: 'SovietMono', monospace;
-}
-
-.system-header-atomic {
     background: linear-gradient(
         to bottom,
         var(--color-metal-gray) 0%,
         var(--color-metal-dark) 100%
     );
     border: 2px solid var(--color-stamp-dark-red);
+    border-top: 4px solid var(--color-lamp-orange);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        4px 4px 8px var(--color-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.system-header::before {
+.atomic-header::before {
     content: '';
     position: absolute;
     top: 0;
@@ -61,223 +48,206 @@ body {
     height: 4px;
     background: linear-gradient(90deg, 
         transparent, 
-        var(--color-gold), 
-        transparent);
-}
-
-.system-header-atomic::before {
-    background: linear-gradient(90deg, 
-        transparent, 
         var(--color-lamp-orange), 
         transparent);
 }
 
-.system-header::after {
-    content: '';
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 60px;
-    height: 60px;
-    background: var(--color-white);
-    border: 2px solid var(--color-ink-black);
-    border-radius: 50%;
-    opacity: 0.1;
-}
-
-.header-glitch {
+.atomic-glitch {
     position: relative;
     display: inline-block;
     margin-bottom: 1rem;
 }
 
-.header-glitch h1 {
-    color: var(--color-white);
+.atomic-glitch h1 {
+    color: var(--color-paper-beige);
     font-size: 2.5rem;
     letter-spacing: 2px;
     position: relative;
     z-index: 2;
     text-shadow: 2px 2px 4px var(--color-shadow);
     font-weight: bold;
-    font-family: 'SovietMono', monospace;
+    font-family: 'SovietHeading', sans-serif;
 }
 
-.glitch-text {
+.atomic-glitch-layer {
     position: absolute;
     top: 2px;
     left: 2px;
-    color: var(--color-gold);
+    color: var(--color-lamp-orange);
     opacity: 0.3;
     z-index: 1;
 }
 
-.system-status {
+.atomic-status {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.9rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
-    color: var(--color-white);
+    color: var(--color-paper-beige);
 }
 
-.status-indicator {
-    color: var(--color-gold);
-    font-weight: bold;
-    text-shadow: 1px 1px 2px var(--color-shadow);
-}
-
-.date-display {
-    color: var(--color-white);
+.atomic-date {
+    color: var(--color-paper-beige);
     font-size: 0.8rem;
     letter-spacing: 1px;
-    font-family: 'SovietMono', monospace;
+    font-family: 'ArchiveMono', monospace;
 }
 
-/* Формы как листы в папке */
-.access-forms {
+/* Atomic Forms - ИСПРАВЛЕНИЕ ДЛЯ ПЕРЕКЛЮЧЕНИЯ ФОРМ */
+.atomic-forms {
     position: relative;
-    min-height: auto; /* Убираем фиксированную высоту */
-    margin-bottom: 2rem; /* Добавляем отступ снизу */
+    min-height: auto;
+    margin-bottom: 2rem;
 }
 
-.form-container {
+/* Скрываем все формы по умолчанию */
+.atomic-forms .form-container {
     display: none;
-    background: var(--color-white);
-    border: 2px solid var(--color-line-brown);
-    border-radius: 2px;
-    padding: 2rem;
-    box-shadow: 
-        3px 3px 6px var(--color-shadow),
-        inset 0 0 20px rgba(139, 115, 85, 0.1);
-    position: relative;
-    font-family: 'SovietType', serif;
-    margin-bottom: 1rem; /* Отступ между формами если они будут видны одновременно */
 }
 
-.form-container-atomic {
-    background: var(--color-paper-beige);
-    border: 1px solid var(--color-border-light);
-    border-top: 3px solid var(--color-stamp-red);
-    box-shadow: 
-        2px 2px 4px var(--color-shadow),
-        inset 0 0 20px rgba(139, 0, 0, 0.02);
-}
-
-.form-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, 
-        var(--color-folder-red), 
-        var(--color-gold), 
-        var(--color-folder-red));
-}
-
-.form-container-atomic::before {
-    background: linear-gradient(90deg, 
-        var(--color-stamp-red), 
-        var(--color-lamp-orange), 
-        var(--color-stamp-red));
-}
-
-.form-container::after {
-    content: '';
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--color-line-brown);
-    border-radius: 50%;
-    opacity: 0.1;
-}
-
-.form-container.active {
+/* Показываем только активную форму */
+.atomic-forms .form-container.active {
     display: block;
     animation: formAppear 0.6s ease;
 }
 
-.form-header {
+@keyframes formAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) perspective(500px) rotateX(2deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) perspective(500px) rotateX(0);
+    }
+}
+
+.atomic-form-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--color-line-brown);
-    position: relative;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
-.form-header::after {
-    content: '•••';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--color-line-brown);
-    font-size: 1.5rem;
-    letter-spacing: 3px;
+.atomic-form-header::after {
+    display: none;
 }
 
-.form-title {
-    color: var(--color-folder-red);
-    font-size: 1.3rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: 'SovietMono', monospace;
-}
-
-.form-icon {
-    font-size: 1.8rem;
-    color: var(--color-folder-red);
-    opacity: 0.8;
-}
-
-.access-form {
+.atomic-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.input-row {
+.atomic-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
-.input-hint {
-    color: var(--color-ink-gray);
+/* Atomic Inputs */
+.atomic-input-group {
+    position: relative;
+    margin-bottom: 1.2rem;
+}
+
+.atomic-input-group label {
+    display: block;
+    color: var(--color-ink-dark);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-family: 'ArchiveMono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px dotted var(--color-border-light);
+    padding-bottom: 0.2rem;
+}
+
+.atomic-input-wrapper {
+    position: relative;
+}
+
+.atomic-input {
+    width: 100%;
+    background: var(--color-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: 1px;
+    color: var(--color-ink-dark);
+    font-family: 'ArchiveMono', monospace;
+    padding: 0.8rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: inset 1px 1px 3px var(--color-shadow);
+}
+
+.atomic-input:focus {
+    border-color: var(--color-stamp-red);
+    box-shadow: 
+        inset 1px 1px 3px var(--color-shadow),
+        0 0 0 2px rgba(139, 0, 0, 0.1);
+    background: var(--color-highlight);
+}
+
+.atomic-hint {
+    color: var(--color-metal-gray);
     font-size: 0.8rem;
     margin-top: 0.3rem;
     font-style: italic;
     text-align: right;
-    border-top: 1px dotted var(--color-line-brown);
+    border-top: 1px dotted var(--color-border-light);
     padding-top: 0.2rem;
+    font-family: 'ArchiveMono', monospace;
 }
 
-.password-strength {
-    margin-top: 0.5rem;
-    padding: 0.5rem;
-    background: rgba(139, 115, 85, 0.05);
-    border: 1px solid var(--color-line-brown);
+.atomic-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-metal-gray);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.3rem;
+    transition: all 0.3s ease;
+    z-index: 2;
+    background: var(--color-white);
+    border: 1px solid var(--color-border-light);
     border-radius: 1px;
 }
 
-.strength-bar {
+.atomic-toggle:hover {
+    color: var(--color-stamp-red);
+    background: var(--color-highlight);
+}
+
+/* Atomic Password Strength */
+.atomic-strength {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(139, 0, 0, 0.05);
+    border: 1px solid var(--color-border-light);
+    border-radius: 1px;
+}
+
+.atomic-bar {
     height: 6px;
-    background: var(--color-paper-yellow);
-    border: 1px solid var(--color-line-brown);
+    background: var(--color-paper-aged);
+    border: 1px solid var(--color-border-light);
     border-radius: 1px;
     overflow: hidden;
     margin-bottom: 0.5rem;
     position: relative;
 }
 
-.strength-level {
+.atomic-level {
     height: 100%;
     width: 0%;
     border-radius: 0;
@@ -285,279 +255,296 @@ body {
     position: relative;
 }
 
-.strength-level.weak { 
+.atomic-level.weak { 
     width: 33%; 
-    background: var(--color-folder-red);
+    background: var(--color-stamp-red);
 }
 
-.strength-level.medium { 
+.atomic-level.medium { 
     width: 66%; 
-    background: var(--color-gold);
+    background: var(--color-lamp-orange);
 }
 
-.strength-level.strong { 
+.atomic-level.strong { 
     width: 100%; 
-    background: var(--color-stamp-blue);
+    background: var(--color-lamp-green);
 }
 
-.strength-text {
-    color: var(--color-ink-black);
+.atomic-text {
+    color: var(--color-ink-dark);
     font-size: 0.8rem;
     text-align: center;
     display: block;
     text-transform: uppercase;
-    font-family: 'SovietMono', monospace;
+    font-family: 'ArchiveMono', monospace;
     font-weight: bold;
 }
 
-.security-notice {
+/* Atomic Notices and Checks */
+.atomic-notice {
     background: rgba(139, 0, 0, 0.05);
-    border: 2px solid var(--color-folder-red);
+    border: 2px solid var(--color-stamp-red);
+    border-left: 4px solid var(--color-stamp-red);
     border-radius: 1px;
     padding: 1rem;
     display: flex;
     align-items: center;
     gap: 0.8rem;
     font-size: 0.9rem;
-    color: var(--color-ink-black);
+    color: var(--color-ink-dark);
     position: relative;
-    font-family: 'SovietMono', monospace;
+    font-family: 'ArchiveMono', monospace;
 }
 
-.security-notice-atomic {
-    background: rgba(139, 0, 0, 0.05);
-    border: 2px solid var(--color-stamp-red);
-    border-left: 4px solid var(--color-stamp-red);
-}
-
-.security-notice::before {
-    content: '!';
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    background: var(--color-white);
-    color: var(--color-folder-red);
-    font-weight: bold;
-    padding: 0 5px;
-    font-size: 1.2rem;
-}
-
-.notice-icon {
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    color: var(--color-folder-red);
-}
-
-.security-check {
+.atomic-check {
     display: flex;
     align-items: flex-start;
     gap: 0.8rem;
     padding: 1rem;
     background: rgba(139, 115, 85, 0.05);
-    border: 1px solid var(--color-line-brown);
+    border: 1px solid var(--color-border-light);
     border-radius: 1px;
     transition: all 0.3s ease;
 }
 
-.security-check:has(input:checked) {
+.atomic-check:has(input:checked) {
     background: rgba(30, 58, 95, 0.05);
     border-color: var(--color-stamp-blue);
 }
 
-.security-check input[type="checkbox"] {
+.atomic-checkbox {
     margin-top: 0.2rem;
     transform: scale(1.3);
-    accent-color: var(--color-folder-red);
+    accent-color: var(--color-stamp-red);
 }
 
-.security-check label {
-    color: var(--color-ink-black);
+.atomic-label {
+    color: var(--color-ink-dark);
     font-size: 0.9rem;
     line-height: 1.3;
     cursor: pointer;
     font-weight: bold;
+    font-family: 'ArchiveMono', monospace;
 }
 
-.btn-icon {
-    font-size: 1.1rem;
-    margin-right: 0.5rem;
-}
-
-.form-switch {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid var(--color-line-brown);
+/* Atomic Switch */
+.atomic-switch {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
     font-size: 0.9rem;
-    color: var(--color-ink-gray);
+    color: var(--color-metal-gray);
     position: relative;
 }
 
-.form-switch::before {
-    content: '↕';
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--color-white);
-    color: var(--color-line-brown);
-    padding: 0 10px;
-    font-size: 1.2rem;
+.atomic-switch::before {
+    display: none;
 }
 
-.form-switch button {
-    background: none;
-    border: none;
-    color: var(--color-folder-red);
-    cursor: pointer;
-    font-family: 'SovietMono', monospace;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 0.9rem;
-    position: relative;
-}
-
-.form-switch button::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-folder-red);
-    transition: width 0.3s ease;
-}
-
-.form-switch button:hover {
-    color: var(--color-folder-dark-red);
-}
-
-.form-switch button:hover::after {
-    width: 100%;
-}
-
-.system-messages {
+/* Atomic Messages */
+.atomic-messages {
     margin-top: 1.5rem;
     min-height: 80px;
 }
 
-.login-footer {
+/* Atomic Footer */
+.atomic-footer {
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 3px double var(--color-line-brown);
+    border-top: 3px double var(--color-border-light);
     position: relative;
 }
 
-.footer-content {
+.atomic-footer-content {
     text-align: center;
 }
 
-.footer-content p {
-    color: var(--color-ink-gray);
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
-    font-family: 'SovietMono', monospace;
-}
-
-.security-level {
-    color: var(--color-ink-black);
+.atomic-level-indicator {
+    color: var(--color-ink-dark);
     font-size: 0.8rem;
     text-transform: uppercase;
-    font-family: 'SovietMono', monospace;
+    font-family: 'ArchiveMono', monospace;
     font-weight: bold;
     padding: 0.5rem;
     background: var(--color-white);
-    border: 2px solid var(--color-folder-red);
+    border: 2px solid var(--color-stamp-red);
     display: inline-block;
     margin-top: 0.5rem;
 }
 
-.level-maximum {
-    color: var(--color-folder-red);
-    font-weight: bold;
+/* Исправления для единого стиля */
+.atomic-input {
+    font-family: 'ArchiveMono', monospace !important;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
 }
 
-/* Адаптивность для LOGIN */
+/* Улучшенные переключатели пароля */
+.password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-metal-gray);
+    color: var(--color-paper-beige);
+    border: 1px solid var(--color-metal-dark);
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+    font-family: 'ArchiveMono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 1px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.password-toggle:hover {
+    background: var(--color-stamp-red);
+    color: var(--color-white);
+}
+
+/* Кнопки переключения форм в едином стиле */
+.form-switch-btn {
+    background: linear-gradient(
+        to bottom,
+        var(--color-paper-aged) 0%,
+        var(--color-paper-dark) 100%
+    );
+    border: 1px solid var(--color-metal-gray);
+    color: var(--color-ink-brown);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'ArchiveMono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 8px;
+    border-radius: 1px;
+    box-shadow: 1px 1px 0 var(--color-shadow);
+}
+
+.form-switch-btn:hover {
+    background: linear-gradient(
+        to bottom,
+        var(--color-paper-dark) 0%,
+        var(--color-paper-aged) 100%
+    );
+    transform: translate(1px, 1px);
+    box-shadow: 0px 0px 0 var(--color-shadow);
+    color: var(--color-stamp-red);
+}
+
+/* Улучшенный контейнер переключателя */
+.atomic-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-metal-gray);
+    flex-wrap: wrap;
+}
+
+.atomic-switch-text {
+    color: var(--color-ink-dark);
+    font-family: 'ArchiveMono', monospace;
+    font-size: 0.8rem;
+}
+
+/* Адаптивность для Atomic */
 @media (max-width: 768px) {
-    .login-container { 
+    .atomic-container { 
         padding: 1rem; 
         max-width: 100%;
     }
     
-    .system-header { 
+    .atomic-header { 
         padding: 1.5rem; 
         margin-bottom: 1.5rem;
     }
     
-    .header-glitch h1 { 
+    .atomic-glitch h1 { 
         font-size: 1.8rem; 
         letter-spacing: 1px;
     }
     
-    .form-container { 
-        padding: 1.5rem; 
-    }
-    
-    .system-status { 
+    .atomic-status { 
         flex-direction: column; 
         gap: 0.5rem; 
         text-align: center; 
     }
     
-    .input-row {
+    .atomic-row {
         grid-template-columns: 1fr;
+    }
+    
+    .card-atomic-body { 
+        padding: 1rem; 
     }
 }
 
 @media (max-width: 480px) {
-    .form-container { 
+    .atomic-container { 
+        padding: 0.5rem; 
+    }
+    
+    .atomic-header { 
         padding: 1rem; 
     }
     
-    .form-header { 
+    .atomic-form-header { 
         flex-direction: column; 
         gap: 0.5rem; 
         text-align: center; 
     }
     
-    .access-btn { 
+    .atomic-glitch h1 {
+        font-size: 1.5rem;
+    }
+    
+    .atomic-body {
+        padding: 10px;
+    }
+    
+    .card-atomic-body { 
+        padding: 0.8rem; 
+    }
+    
+    .btn-atomic { 
         padding: 1rem; 
         font-size: 0.9rem; 
     }
     
-    .form-switch { 
+    .atomic-switch { 
         flex-direction: column; 
         gap: 0.5rem; 
-    }
-    
-    .header-glitch h1 {
-        font-size: 1.5rem;
-    }
-    
-    body {
-        padding: 10px;
     }
 }
 
 /* Дополнительные исправления для прокрутки */
 @media (max-height: 800px) {
-    .login-container {
+    .atomic-container {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
     
-    .system-header {
+    .atomic-header {
         padding: 1rem;
         margin-bottom: 1rem;
     }
     
-    .form-container {
+    .card-atomic-body {
         padding: 1rem;
     }
 }
@@ -567,7 +554,6 @@ html {
     overflow-y: scroll;
 }
 
-body {
+.atomic-body {
     overflow-y: auto;
-}
 }

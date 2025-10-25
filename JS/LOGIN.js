@@ -123,10 +123,10 @@ function togglePasswordVisibility(event) {
     
     if (input.type === 'password') {
         input.type = 'text';
-        toggle.textContent = '🙈';
+        toggle.textContent = 'СКРЫТЬ';
     } else {
         input.type = 'password';
-        toggle.textContent = '👁';
+        toggle.textContent = 'ПОКАЗАТЬ';
     }
 }
 
@@ -316,11 +316,11 @@ function handleRegistration(event) {
     }, 3000);
 }
 
-// Показать системное сообщение
+// Показать системное сообщение в Atomic стиле
 function showSystemAlert(message, type = 'info') {
     const messagesContainer = document.getElementById('systemMessages');
     const alert = document.createElement('div');
-    alert.className = `system-alert ${type === 'success' ? 'success' : ''}`;
+    alert.className = `system-alert ${type === 'success' ? 'success' : ''} card-atomic`;
     
     const icons = {
         success: '✅',
@@ -336,6 +336,9 @@ function showSystemAlert(message, type = 'info') {
     `;
     
     messagesContainer.appendChild(alert);
+    
+    // Анимация появления
+    alert.style.animation = 'stampAppearAtomic 0.5s ease';
     
     // Автоматическое удаление через 5 секунд
     setTimeout(() => {
